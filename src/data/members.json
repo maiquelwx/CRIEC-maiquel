@@ -1,5 +1,16 @@
 [
   {
+    "name": "Márcia Barbosa",
+    "role": "professor",
+    "institution": "UFRGS",
+    "area": "",
+    "description": "Márcia Barbosa é física, professora titular do Instituto de Física da UFRGS e atual reitora da Universidade Federal do Rio Grande do Sul. É pesquisadora reconhecida internacionalmente por seus trabalhos em sistemas complexos, propriedades da água e modelagem computacional aplicada a problemas ambientais e climáticos. Foi secretária de Políticas e Programas Estratégicos do Ministério da Ciência, Tecnologia e Inovação e diretora da Academia Brasileira de Ciências. Atua também na promoção da equidade de gênero na ciência e na divulgação científica. É membra da Academia Mundial de Ciências (TWAS) e recebeu diversos prêmios nacionais e internacionais por sua contribuição à ciência.",
+    "links": {
+      "lattes": "http://lattes.cnpq.br/7216344229807186"
+    },
+    "imgPath": "/Equipe/MBarbosa.webp"
+  },
+  {
     "name": "Amália Buchweitz Garcez",
     "role": "ic",
     "institution": "UFRGS",
@@ -53,6 +64,17 @@
       "lattes": "http://lattes.cnpq.br/3894096111082082"
     },
     "imgPath": "/Equipe/DBuske.webp"
+  },
+  {
+    "name": "Eduardo Velasco Stock",
+    "role": "pos-doutorando",
+    "institution": "UFRGS",
+    "area": "",
+    "description": "Análise de séries temporais conjuntas de chuvas e níveis de rios das estações hidrometeorológicas da bacia do Guaíba, utilizando técnicas de machine learning, para análise de padrões espaço-temporais com possível aplicação à predição de eventos extremos. Análise de variabilidade e anomalias de temperaturas oceânicas utilizando técnicas de matrizes aleatórias e redes de visibilidade (visibility graphs) para caracterizar correlações e estruturas temporais complexas.",
+    "links": {
+      "lattes": "http://lattes.cnpq.br/1684682273409532"
+    },
+    "imgPath": "/Equipe/EVStock.webp"
   },
   {
     "name": "Fernanda Batista",
@@ -132,6 +154,28 @@
     "imgPath": "/Equipe/MCavalheiro.webp"
   },
   {
+    "name": "Marco Idiart",
+    "role": "professor",
+    "institution": "UFRGS",
+    "area": "",
+    "description": "Marco Idiart é Professor Titular do Instituto de Física da Universidade Federal do Rio Grande do Sul e coordenador do Laboratório de Neurocomputação e Processamento de Linguagem. Sua atuação integra neurociência computacional, física estatística e inteligência artificial, com pesquisas em memória de curto prazo, dinâmica neural, modelos de linguagem e processamento de linguagem natural. Também desenvolve projetos em IA aplicada à saúde, clima e comunicação, com foco em interpretabilidade.",
+    "links": {
+      "lattes": "http://lattes.cnpq.br/2139627813265829"
+    },
+    "imgPath": "/Equipe/MIdiart.webp"
+  },
+  {
+    "name": "Marcos Pérez Leiva",
+    "role": "pos-doutorando",
+    "institution": "UFRGS",
+    "area": "",
+    "description": "Pós-doutorado do Instituto de Física da UFRGS. A minha linha de pesquisa consiste na predição de eventos climáticos extremos utilizando ferramentas de AI. Para isto temos explorado diversas arquiteturas de machine learning para avaliar o seu poder preditivo em séries temporais tabulares e mapas para a predição de temperatura e chuva.",
+    "links": {
+      "lattes": "https://lattes.cnpq.br/3453242618967415"
+    },
+    "imgPath": "/Equipe/MPLeiva.webp"
+  },
+  {
     "name": "Mateus Henrique Köhler",
     "role": "professor",
     "institution": "UFSM",
@@ -163,6 +207,17 @@
       "lattes": "http://lattes.cnpq.br/2408574220216968"
     },
     "imgPath": "/Equipe/RSQuadros.webp"
+  },
+  {
+    "name": "Rita de Cássia Marques Alves",
+    "role": "professor",
+    "institution": "UFRGS",
+    "area": "",
+    "description": "Rita de Cássia Marques Alves é professora titular no Instituto de Geociências da Universidade Federal do Rio Grande do Sul (UFRGS). É especialista na área de Geociências, com ênfase em Meteorologia e atuação em eventos climáticos e qualidade ambiental.",
+    "links": {
+      "lattes": "http://lattes.cnpq.br/7123107007429083"
+    },
+    "imgPath": "/Equipe/RCMAlves.webp"
   },
   {
     "name": "Renan Oliveira Nunes",
