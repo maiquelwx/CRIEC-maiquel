@@ -14,6 +14,14 @@ export function Footer() {
 		{ label: "Publicações", path: "/publicacoes" },
 	]
 
+	{/* INICIO REMOVER */}
+	const temporaryPageLinks = [
+		{ label: "Design System", path: "/design-system" },
+		{ label: "404", path: "/rota-inexistente" },
+		{ label: "Route Error", path: "/design-system?triggerRouteError=true" },
+	]
+	{/* FIM REMOVER */}
+
 	const partners = [
 		{ name: "UFPEL", label: "Universidade Federal de Pelotas" },
 		{
@@ -28,9 +36,9 @@ export function Footer() {
 		<footer className="mt-16 border-t border-border/60 bg-background">
 			<div className="mx-auto max-w-screen-2xl px-4 py-12 md:px-6">
 				{/* Main Footer Content */}
-				<div className="mb-8 grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
+				<div className="mb-8 grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
 					{/* Logo Section */}
-					<div className="flex flex-col gap-4 lg:col-span-1">
+					<div className="flex flex-col gap-4">
 						<div className="flex items-center gap-2">
 							<img src="/Logo-solido.svg" alt="CRIEC" className="h-8 w-8" />
 							<p className="font-heading text-base font-semibold tracking-tight">
@@ -41,6 +49,37 @@ export function Footer() {
 							Centro de Referência Internacional em Estudos Relacionados às
 							Mudanças Climáticas
 						</p>
+						{/* Social Links */}
+						<div className="flex flex-wrap gap-3">
+							<a
+								href="#"
+								className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/60 transition-colors hover:bg-muted"
+								aria-label="GitHub"
+							>
+								<FaGithub className="size-4" />
+							</a>
+							<a
+								href="#"
+								className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/60 transition-colors hover:bg-muted"
+								aria-label="Instagram"
+							>
+								<FaInstagram className="size-4" />
+							</a>
+							<a
+								href="#"
+								className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/60 transition-colors hover:bg-muted"
+								aria-label="LinkedIn"
+							>
+								<FaLinkedin className="size-4" />
+							</a>
+							<a
+								href="#"
+								className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/60 transition-colors hover:bg-muted"
+								aria-label="YouTube"
+							>
+								<FaYoutube className="size-4" />
+							</a>
+						</div>
 					</div>
 
 					{/* Navigation Links */}
@@ -58,6 +97,23 @@ export function Footer() {
 								</li>
 							))}
 						</ul>
+						{/* INICIO REMOVER */}
+						<div className="pt-1">
+							<p className="mb-2 text-xs text-muted-foreground">Atalhos temporários</p>
+							<ul className="space-y-2">
+								{temporaryPageLinks.map((link) => (
+									<li key={link.path}>
+										<Link
+											to={link.path}
+											className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+										>
+											{link.label}
+										</Link>
+									</li>
+								))}
+							</ul>
+						</div>
+						{/* FIM REMOVER */}
 					</div>
 
 					{/* Contact */}
@@ -108,41 +164,6 @@ export function Footer() {
 								</li>
 							))}
 						</ul>
-					</div>
-
-					{/* Social Links */}
-					<div className="flex flex-col gap-3">
-						<h3 className="text-sm font-semibold">Redes Sociais</h3>
-						<div className="flex flex-wrap gap-3">
-							<a
-								href="#"
-								className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/60 transition-colors hover:bg-muted"
-								aria-label="GitHub"
-							>
-								<FaGithub className="size-4" />
-							</a>
-							<a
-								href="#"
-								className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/60 transition-colors hover:bg-muted"
-								aria-label="Instagram"
-							>
-								<FaInstagram className="size-4" />
-							</a>
-							<a
-								href="#"
-								className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/60 transition-colors hover:bg-muted"
-								aria-label="LinkedIn"
-							>
-								<FaLinkedin className="size-4" />
-							</a>
-							<a
-								href="#"
-								className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/60 transition-colors hover:bg-muted"
-								aria-label="YouTube"
-							>
-								<FaYoutube className="size-4" />
-							</a>
-						</div>
 					</div>
 
 					{/* Legal */}

@@ -92,7 +92,7 @@ function MemberLinks({ links }: { links?: Member["links"] }) {
 						<HoverCardTrigger asChild>
 							<Button
 								asChild
-								variant="outline-1"
+								variant="outline-2"
 								size="icon-lg"
 								className="rounded-full"
 							>
@@ -137,7 +137,7 @@ export function MemberCard({ member }: { member: Member }) {
 				</div>
 			</DialogTrigger>
 
-			<DialogContent className="flex max-h-4/5 w-3/4 max-w-5/6! flex-col">
+			<DialogContent className="flex max-h-4/5 w-3/4 max-w-5xl! flex-col">
 				<div className="grid h-full min-h-0 flex-1 gap-6 overflow-hidden md:grid-cols-[320px_auto] lg:items-start">
 					<MemberImage imageUrl={imageUrl} name={member.name} />
 					<div className="flex flex-col space-y-5 overflow-hidden">

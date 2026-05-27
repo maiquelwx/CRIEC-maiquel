@@ -11,8 +11,14 @@ import {
 	NavigationMenuContent,
 	NavigationMenuLink,
 } from "@/components/ui/navigation-menu"
+import { useEvents } from "@/hooks/useEvents"
 
 function DeskNav() {
+
+	const featuredEvents = useEvents({
+		featured: true,
+	})
+	
 	return (
 		<NavigationMenu
 			viewport={false}
@@ -28,9 +34,16 @@ function DeskNav() {
 				<NavigationMenuItem>
 					<NavigationMenuTrigger>Atividades</NavigationMenuTrigger>
 					<NavigationMenuContent className="min-w-56 p-2">
-						<NavigationMenuLink asChild>
-							<Link to="/atividades/i-workshop-criec">I Workshop CRIEC</Link>
-						</NavigationMenuLink>
+						{featuredEvents.map((event) => (
+							<NavigationMenuLink
+								key={event.slug}
+								asChild
+							>
+								<Link to={`/atividades/${event.slug}`}>
+									{event.title}
+								</Link>
+							</NavigationMenuLink>
+						))}
 					</NavigationMenuContent>
 				</NavigationMenuItem>
 

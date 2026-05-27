@@ -1,7 +1,7 @@
 import { HomePage } from "@/pages/HomePage"
 import { MembersPage } from "@/pages/MembersPage"
 import { PublicationsPage } from "@/pages/PublicationsPage"
-import { EventsPage } from "@/pages/EventsPage"
+import { EventPage } from "@/pages/EventPage"
 import { NotFoundPage } from "@/pages/404Page"
 
 export const publicRoutes = [
@@ -13,9 +13,10 @@ export const publicRoutes = [
 		path: "atividades",
 		children: [
 			{
-				path: "i-workshop-criec",
-				element: <EventsPage />,
+				path: ":slug",
+				element: <EventPage />,
 			},
+
 		],
 	},
 	{

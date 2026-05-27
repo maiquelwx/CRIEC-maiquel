@@ -13,11 +13,15 @@ const buttonVariants = cva(
 				outline:
 					"border-border bg-background shadow-xs hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
 				"outline-1":
-					"border-primary/50 bg-primary/10 hover:bg-primary/15 hover:text-primary aria-expanded:bg-primary/15 aria-expanded:text-primary",
+					"border-chart-1/50 bg-chart-1/10 hover:bg-chart-1/15 hover:text-chart-1 aria-expanded:bg-chart-1/15 aria-expanded:text-chart-1",
 				"outline-2":
-					"border-secondary/50 bg-secondary/10 hover:bg-secondary/15 hover:text-secondary aria-expanded:bg-secondary/15 aria-expanded:text-secondary",
+					"border-chart-2/50 bg-chart-2/10 hover:bg-chart-2/15 hover:text-chart-2 aria-expanded:bg-chart-2/15 aria-expanded:text-chart-2",
 				"outline-3":
-					"border-accent/50 bg-accent/10 hover:bg-accent/15 hover:text-accent-foreground aria-expanded:bg-accent/15 aria-expanded:text-accent-foreground",
+					"border-chart-3/50 bg-chart-3/10 hover:bg-chart-3/15 hover:text-chart-3 aria-expanded:bg-chart-3/15 aria-expanded:text-chart-3",
+				"outline-4":
+					"border-chart-4/50 bg-chart-4/10 hover:bg-chart-4/15 hover:text-chart-4 aria-expanded:bg-chart-4/15 aria-expanded:text-chart-4",
+				"outline-5":
+					"border-chart-5/50 bg-chart-5/10 hover:bg-chart-5/15 hover:text-chart-5 aria-expanded:bg-chart-5/15 aria-expanded:text-chart-5",
 				secondary:
 					"bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
 				ghost:

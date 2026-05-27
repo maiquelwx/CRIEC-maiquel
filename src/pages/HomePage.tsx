@@ -102,7 +102,7 @@ function PartnersMarquee() {
 						: [partner.lightPath, partner.darkPath]
 				return (
 					<div key={partner.name} className="flex">
-						<HoverCard>
+						<HoverCard openDelay={450} closeDelay={200}>
 							<HoverCardTrigger asChild>
 								<img
 									src={logoSrc}
