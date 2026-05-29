@@ -1,13 +1,14 @@
 {
-  "name": "front-CRIEC",
+  "name": "front-criec",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "postbuild": "node scripts/post-seo.js",
     "lint": "eslint .",
-    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,html,css,md}\"",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview"
   },

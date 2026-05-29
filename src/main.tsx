@@ -1,15 +1,18 @@
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { RouterProvider } from "react-router-dom"
+import { HelmetProvider } from "react-helmet-async"
+import { ThemeProvider } from "@/components/theme-provider.tsx"
 
 import "./index.css"
 import { router } from "./routes/router.tsx"
-import { ThemeProvider } from "@/components/theme-provider.tsx"
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
-		<ThemeProvider>
-			<RouterProvider router={router} />
-		</ThemeProvider>
+		<HelmetProvider>
+			<ThemeProvider>
+				<RouterProvider router={router} />
+			</ThemeProvider>
+		</HelmetProvider>
 	</StrictMode>
 )
