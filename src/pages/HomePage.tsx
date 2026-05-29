@@ -17,7 +17,7 @@ function HeroSection() {
 			className="animate-in duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] zoom-in-95 fade-in"
 		>
 			<div className="overflow-hidden rounded-4xl">
-				<div className="relative h-128 md:aspect-16/8 md:h-auto">
+				<div className="relative aspect-square w-full max-h-[50svh] md:max-h-full md:aspect-16/8 md:h-auto">
 					<img src="/hero.webp" alt="Hero" className="size-full object-cover" />
 					<div className="absolute inset-0 bg-linear-to-r from-background/70 via-background/40 to-transparent" />
 					<div className="absolute top-5 right-8 flex items-center gap-2">

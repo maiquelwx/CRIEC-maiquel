@@ -23,24 +23,6 @@ export default function Marquee({
 	const content = React.Children.toArray(children)
 	const containerRef = React.useRef<HTMLDivElement>(null)
 
-	React.useEffect(() => {
-		const container = containerRef.current
-		if (!container) return
-		const preventScroll = (e: Event) => {
-			e.preventDefault()
-			e.stopPropagation()
-			container.scrollLeft = 0
-		}
-		container.addEventListener("scroll", preventScroll, { passive: false })
-		container.addEventListener("wheel", preventScroll, { passive: false })
-		container.addEventListener("touchmove", preventScroll, { passive: false })
-		return () => {
-			container.removeEventListener("scroll", preventScroll)
-			container.removeEventListener("wheel", preventScroll)
-			container.removeEventListener("touchmove", preventScroll)
-		}
-	}, [])
-
 	const animationClass =
 		direction === "left" ? "marquee-inner" : "marquee-inner-reverse"
 
