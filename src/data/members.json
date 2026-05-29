@@ -276,6 +276,17 @@
     "imgPath": "/Equipe/VDornelas.webp"
   },
   {
+    "name": "Walas da Silva Oliveira",
+    "role": "pos-doutorando",
+    "institution": "UFPel",
+    "area": "",
+    "description": "A linha de pesquisa é voltada à análise temporal de eventos de enchentes no Rio Grande do Sul, empregando métodos de Machine Learning para explorar séries históricas, identificar padrões hidrológicos e climáticos, e desenvolver modelos preditivos que possam contribuir para o monitoramento e a antecipação de situações de risco.",
+    "links": {
+      "lattes": "http://lattes.cnpq.br/5523617081465799"
+    },
+    "imgPath": "/Equipe/WSOliveira.webp"
+  },
+  {
     "name": "Yan Araujo Santos da Campo",
     "role": "doutorando",
     "institution": "UFSM",
