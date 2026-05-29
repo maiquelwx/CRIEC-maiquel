@@ -1,22 +1,22 @@
 [
-  {
-    "name": "UFRGS",
-    "darkPath": "/Parceiros/UFRGS-dark.svg",
-    "lightPath": "/Parceiros/UFRGS-light.svg"
-  },
-  {
-    "name": "UFPel",
-    "darkPath": "/Parceiros/UFPel-dark.svg",
-    "lightPath": "/Parceiros/UFPel-light.svg"
-  },
-  {
-    "name": "UFSM",
-    "darkPath": "/Parceiros/UFSM-dark.svg",
-    "lightPath": "/Parceiros/UFSM-light.svg"
-  },
-  {
-    "name": "FAPERGS",
-    "darkPath": "/Parceiros/FAPERGS.svg",
-    "lightPath": "/Parceiros/FAPERGS.svg"
-  }
+	{
+		"name": "UFRGS",
+		"darkPath": "/Parceiros/UFRGS-dark.svg",
+		"lightPath": "/Parceiros/UFRGS-light.svg"
+	},
+	{
+		"name": "UFPel",
+		"darkPath": "/Parceiros/UFPel-dark.svg",
+		"lightPath": "/Parceiros/UFPel-light.svg"
+	},
+	{
+		"name": "UFSM",
+		"darkPath": "/Parceiros/UFSM-dark.svg",
+		"lightPath": "/Parceiros/UFSM-light.svg"
+	},
+	{
+		"name": "FAPERGS",
+		"darkPath": "/Parceiros/FAPERGS.svg",
+		"lightPath": "/Parceiros/FAPERGS.svg"
+	}
 ]

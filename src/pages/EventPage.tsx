@@ -17,9 +17,7 @@ export function EventPage() {
 	const { slug } = useParams()
 
 	const events = useEvents()
-	const event = events.find(
-		(event) => event.slug === slug
-	)
+	const event = events.find((event) => event.slug === slug)
 
 	if (!event) {
 		return <NotFoundPage />
@@ -43,25 +41,22 @@ export function EventPage() {
 				{/* Left Column: Description and Images */}
 				<div className="flex flex-col gap-4 lg:col-span-1">
 					<div className="px-2 py-1 lg:px-3">
-						<p className="text-sm whitespace-pre-wrap leading-relaxed lg:text-base">
+						<p className="text-sm leading-relaxed whitespace-pre-wrap lg:text-base">
 							{event.description}
 						</p>
 					</div>
 
 					{event.images && event.images.length > 0 && (
 						<div className="relative px-10">
-							<Carousel
-								className="w-full"
-								opts={{ loop: true }}
-							>
+							<Carousel className="w-full" opts={{ loop: true }}>
 								<CarouselContent>
 									{event.images.map((image, index) => (
 										<CarouselItem key={`${image}-${index}`}>
-											<AspectRatio ratio={4/3}>
+											<AspectRatio ratio={4 / 3}>
 												<img
 													src={image}
 													alt={`${event.title} - imagem ${index + 1}`}
-													className="m-auto max-h-full max-w-full object-contain border rounded-2xl"
+													className="m-auto max-h-full max-w-full rounded-2xl border object-contain"
 												/>
 											</AspectRatio>
 										</CarouselItem>
@@ -80,11 +75,11 @@ export function EventPage() {
 
 				{/* Right Column: Sessions */}
 				<section id="sessions" className="lg:col-span-1">
-					<div className="h-[80svh] flex flex-col">
+					<div className="flex h-[80svh] flex-col">
 						<ScrollArea type="always" className="relative h-full w-full px-4">
 							{/* Fade overlay*/}
 							<div className="pointer-events-none absolute top-0 z-10 h-[5%] w-full bg-linear-to-b from-background to-transparent" />
-							<div className="grid gap-4 p-0 lg:pb-[30svh] lg:pt-[5%] lg:grid-cols-1 xl:grid-cols-2">
+							<div className="grid gap-4 p-0 lg:grid-cols-1 lg:pt-[5%] lg:pb-[30svh] xl:grid-cols-2">
 								{event.sessions.map((session) => (
 									<SessionCard
 										key={session.title}

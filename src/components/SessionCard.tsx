@@ -30,7 +30,13 @@ interface Session {
 	coordinators?: string[]
 }
 
-const tagVariants = ["outline-1", "outline-2", "outline-3", "outline-4", "outline-5"] as const
+const tagVariants = [
+	"outline-1",
+	"outline-2",
+	"outline-3",
+	"outline-4",
+	"outline-5",
+] as const
 
 function SessionCard({
 	session,
@@ -49,7 +55,7 @@ function SessionCard({
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Card className="cursor-pointer transition-all gap-2 hover:-translate-y-1 hover:shadow-sm">
+				<Card className="cursor-pointer gap-2 transition-all hover:-translate-y-1 hover:shadow-sm">
 					<CardHeader>
 						<span className="inline-flex items-center gap-1 text-lg text-muted-foreground">
 							<CalendarDays data-icon="inline-start" className="size-4.5" />

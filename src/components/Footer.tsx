@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin } from "lucide-react"
 import { FaGithub, FaLinkedin, FaInstagram, FaYoutube } from "react-icons/fa"
 import { Separator } from "@/components/ui/separator"
 
-export function Footer() {
+function Footer() {
 	const currentYear = new Date().getFullYear()
 
 	// TODO: Ajustar links de navegação e organizar melhor as rotas
@@ -14,13 +14,17 @@ export function Footer() {
 		{ label: "Publicações", path: "/publicacoes" },
 	]
 
-	{/* INICIO REMOVER */}
+	{
+		/* INICIO REMOVER */
+	}
 	const temporaryPageLinks = [
 		{ label: "Design System", path: "/design-system" },
 		{ label: "404", path: "/rota-inexistente" },
 		{ label: "Route Error", path: "/design-system?triggerRouteError=true" },
 	]
-	{/* FIM REMOVER */}
+	{
+		/* FIM REMOVER */
+	}
 
 	const partners = [
 		{ name: "UFPEL", label: "Universidade Federal de Pelotas" },
@@ -99,7 +103,9 @@ export function Footer() {
 						</ul>
 						{/* INICIO REMOVER */}
 						<div className="pt-1">
-							<p className="mb-2 text-xs text-muted-foreground">Atalhos temporários</p>
+							<p className="mb-2 text-xs text-muted-foreground">
+								Atalhos temporários
+							</p>
 							<ul className="space-y-2">
 								{temporaryPageLinks.map((link) => (
 									<li key={link.path}>
@@ -211,3 +217,5 @@ export function Footer() {
 		</footer>
 	)
 }
+
+export default Footer

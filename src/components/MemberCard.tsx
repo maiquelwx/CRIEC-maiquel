@@ -88,7 +88,7 @@ function MemberLinks({ links }: { links?: Member["links"] }) {
 				if (!url) return null
 
 				return (
-					<HoverCard key={key}>
+					<HoverCard key={key} openDelay={500} closeDelay={150}>
 						<HoverCardTrigger asChild>
 							<Button
 								asChild

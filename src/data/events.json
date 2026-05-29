@@ -1,217 +1,217 @@
 [
-  {
-    "slug": "i-workshop-criec",
-    "title": "I Workshop CRIEC",
-    "featured": true,
-    "tags": [
-      "Desastres",
-      "Previsão",
-      "Eventos extremos",
-      "Machine learning",
-      "Visita guiada"
-    ],
-    "description": "\tPrimeiro workshop do projeto CRIEC/FAPERGS \"Eventos Climáticos e Desastres no RS: Caracterização e Predição com IA\". O evento reúne pesquisadores para discutir aplicações de inteligência artificial na compreensão e previsão de eventos climáticos extremos no Rio Grande do Sul.\n\tAs apresentações abrangem sistemas de alerta antecipado, machine learning para previsões, análise de vulnerabilidade social, entre outros temas. O workshop culmina com uma visita guiada pelo Centro Histórico de Porto Alegre, explorando a memória dos eventos extremos.",
-    "sessions": [
-      {
-        "title": "Como a IA transforma o Big Data jornalístico em inteligência operacional e resiliência local",
-        "date": "2026-05-13T14:00:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 0,
-        "description": "Proposta de aprimoramento da comunicação em sistemas de alerta antecipado (EWS).",
-        "coordinators": ["Fernando Silva", "Marco Idiart"]
-      },
-      {
-        "title": "O Que os Dados Nos Dizem Sobre Eventos Extremos e Perdas Econômicas",
-        "date": "2026-05-13T14:30:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 0,
-        "description": "Apresentação sobre inteligência territorial e leitura de eventos extremos a partir dos dados, enfatizando as perdas associadas e impactos econômicos.",
-        "coordinators": ["Raí Nunes", "Marco Idiart"]
-      },
-      {
-        "title": "Estimando Impactos de Desastres a Partir de Dados Oficiais",
-        "date": "2026-05-13T15:00:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 0,
-        "description": "Apresentação sobre estimativa de impactos de desastres usando dados oficiais.",
-        "coordinators": ["Maitê Azambuja (UFRGS)", "Marco Idiart"]
-      },
-      {
-        "title": "Lições da Sala de Situação de Pelotas nas Cheias de 2024",
-        "date": "2026-05-13T15:30:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 0,
-        "description": "Relato das ações de modelagem, monitoramento e resposta realizadas na Sala de Situação de Pelotas durante as cheias de 2024, destacando as lições aprendidas, desafios enfrentados e recomendações para gestão de risco e resposta urbana.",
-        "coordinators": ["Daniela Buske", "Régis Quadros", "Marco Idiart"]
-      },
-      {
-        "title": "TideSat: Monitoramento de Nível da Água",
-        "date": "2026-05-14T09:00:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 1,
-        "description": "Apresentação da TideSat sobre monitoramento de nível da água e aplicações para apoio à previsão hidrológica.",
-        "coordinators": ["TideSat"]
-      },
-      {
-        "title": "Modelos de Predição do Nível da Água no Rio Guaíba",
-        "date": "2026-05-14T10:30:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 1,
-        "description": "Sessão sobre a análise comparativa de diferentes modelos de predição do nível da água em rios, incluindo avaliação de desempenho e limites de aplicação.",
-        "coordinators": ["Juliano Almeida Machado", "Daniela Buske"]
-      },
-      {
-        "title": "Infraestrutura de Processamento de Dados para Previsão Hidrológica",
-        "date": "2026-05-14T11:00:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 1,
-        "description": "Discussão sobre infraestrutura de processamento de dados para previsão hidrológica, com Long Short-Term Memory (LSTM).",
-        "coordinators": ["Carlos Henrique Moraes Praia", "Daniela Buske"]
-      },
-      {
-        "title": "Modelagem Hidrológica com Dados Remotos",
-        "date": "2026-05-14T11:30:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 1,
-        "description": "Apresentação sobre modelagem hidrológica com dados remotos, com estudo de caso aplicado ao Rio Piratini (RS).",
-        "coordinators": ["Varlei Barbosa Gonçalves", "Daniela Buske"]
-      },
-      {
-        "title": "Eventos Climáticos Extremos no Rio Grande do Sul",
-        "date": "2026-05-14T14:00:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 2,
-        "description": "Apresentação e caracterização de eventos climáticos extremos no Rio Grande do Sul.",
-        "coordinators": ["Fernanda Batista da Silva", "Carolina Brito"]
-      },
-      {
-        "title": "Detecção de Eventos Extremos em Dados Climáticos",
-        "date": "2026-05-14T14:30:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 2,
-        "description": "Comparação entre métodos estatísticos e modelos de inteligência artificial na detecção de eventos extremos.",
-        "coordinators": ["Amália Garcez", "Carolina Brito"]
-      },
-      {
-        "title": "Quem é Suscetível a um Aviso Antecipado de Desastre?",
-        "date": "2026-05-14T15:00:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 2,
-        "description": "Análises da pesquisa mundial de valores sobre suscetibilidade a aviso antecipado de desastre.",
-        "coordinators": ["Bruna Borba", "Carolina Brito"]
-      },
-      {
-        "title": "Análise da Relação Entre Sensação Térmica e Dengue",
-        "date": "2026-05-14T15:30:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 2,
-        "description": "Análise da relação entre sensação térmica e dengue por meio de Random Forest.",
-        "coordinators": ["Bruno Coelho Bulcão", "Carolina Brito"]
-      },
-      {
-        "title": "Infraestrutura Para Integração de Dados e Suas Aplicações",
-        "date": "2026-05-14T16:00:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 2,
-        "description": "Apresentação das visualizações e das aplicações desenvolvidas, com discussão dos desafios na integração de diferentes bancos de dados.",
-        "coordinators": ["Ricardo Gava Rodrigues Junior", "Maiquel Cavalheiro", "Carolina Brito"]
-      },
-      {
-        "title": "Machine Learning Para Previsão de Séries Temporais de Temperatura",
-        "date": "2026-05-15T09:00:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 3,
-        "description": "Um estudo sobre modelos de machine learning para previsão de séries temporais de temperatura em Porto Alegre.",
-        "coordinators": ["Marcos Perez", "Rita de Cássia Marques Alves"]
-      },
-      {
-        "title": "Redes Neurais Convolucionais na Previsão de Temperatura",
-        "date": "2026-05-15T09:30:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 3,
-        "description": "Apresentação da aplicação de rede neural convolucional na previsão de temperatura em Porto Alegre.",
-        "coordinators": ["Ana Lúcia Antonioli", "Rita de Cássia Marques Alves"]
-      },
-      {
-        "title": "Multilayer Perceptron e Precipitação",
-        "date": "2026-05-15T10:00:00-03:00",
-        "location": "Campus do Vale",
-        "address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
-        "tag": 3,
-        "description": "Uma análise de desempenho de multilayer Perceptron aplicado à precipitação.",
-        "coordinators": ["Renan Nunes", "Rita de Cássia Marques Alves"]
-      },
-      {
-        "title": "Entre Muros: Desastres, Memórias e Águas",
-        "date": "2026-05-16T09:00:00-03:00",
-        "location": "Centro Histórico de Porto Alegre",
-        "address": "Encontro no Mercado Público - Centro Histórico de Porto Alegre",
-        "tag": 4,
-        "description": "Percurso passando por 9 pontos no Centro Histórico de Porto Alegre, abordando questões da formação da cidade, enchentes, vulnerabilidade e mecanismos de prevenção. Duração aproximada: 1 hora e 30 minutos.",
-        "coordinators": [
-          "Raí Nunes dos Santos"
-        ]
-      }
-    ],
-    "images": [
-      "/Eventos/workshop.webp"
-    ]
-  },
-  {
-    "slug": "entre-muros-desastres-memorias-e-aguas-1",
-    "title": "Entre muros: desastres, memórias e águas",
-    "featured": true,
-    "tags": [
-      "Visita guiada"
-    ],
-    "description": "\tUma iniciativa do grupo Clima, Desastres e Inteligência Artificial, financiada pelo edital FAPERGS-CRIEC, propõe um percurso guiado e interativo pelo Centro Histórico de Porto Alegre, com foco na memória dos eventos climáticos extremos e na infraestrutura de contenção de cheias da cidade. A condução é de Raí Nunes dos Santos, Geógrafo, Dr. em Geografia pela UFRGS.\n\tDurante a caminhada, os participantes recebem um mapa-guia impresso para acompanhar uma leitura territorial contínua pelos nove pontos do trajeto, percorrendo a complexa relação entre o espaço urbano e a dinâmica fluvial do Guaíba — incluindo os marcos de até onde a água chegou nas cheias de 1941 e 2024, e as estruturas construídas ao longo das décadas para dotar a cidade de sistemas de proteção.\n\tO trajeto se inicia no Mercado Público e na Avenida Borges de Medeiros, resgatando marcas visíveis e imagens do histórico de inundações. Em seguida, explora a formação socioespacial e logística da cidade na Praça da Alfândega, avançando para a materialidade do sistema de proteção: o muro e a comporta do Portão do Cais Mauá e o funcionamento técnico da Casa de Bombas. A dimensão institucional, simbólica e de poder frente aos desastres é tensionada no eixo da Igreja das Dores e do Comando Militar.\n\tO roteiro também aborda criticamente as novas lógicas de uso do solo, como a Comporta do Cais Embarcadero e as atividades situadas fora do anel de proteção, e as tecnologias de monitoramento representadas pela Régua de Medição no Gasômetro. Por fim, o percurso se encerra no Monumento aos Voluntários, promovendo um debate sobre resiliência, antifragilidade e o papel da sociedade na reconstrução.",
-    "sessions": [
-      {
-        "title": "Percurso guiado pelo Centro Histórico",
-        "date": "2026-04-11T09:00:00-03:00",
-        "location": "Centro Histórico de Porto Alegre",
-        "address": "Mercado Público de Porto Alegre",
-        "tag": 0,
-        "description": "Caminhada de 1h30 por 9 pontos estratégicos do Centro Histórico, abordando a memória dos eventos climáticos extremos e a infraestrutura de contenção de cheias da cidade.",
-        "coordinators": ["Raí Nunes dos Santos"]
-      },{
-        "title": "Percurso guiado pelo Centro Histórico",
-        "date": "2026-04-11T09:00:00-03:00",
-        "location": "Centro Histórico de Porto Alegre",
-        "address": "Mercado Público de Porto Alegre",
-        "tag": 0,
-        "description": "Caminhada de 1h30 por 9 pontos estratégicos do Centro Histórico, abordando a memória dos eventos climáticos extremos e a infraestrutura de contenção de cheias da cidade.",
-        "coordinators": ["Raí Nunes dos Santos"]
-      },{
-        "title": "Percurso guiado pelo Centro Histórico",
-        "date": "2026-04-11T09:00:00-03:00",
-        "location": "Centro Histórico de Porto Alegre",
-        "address": "Mercado Público de Porto Alegre",
-        "tag": 0,
-        "description": "Caminhada de 1h30 por 9 pontos estratégicos do Centro Histórico, abordando a memória dos eventos climáticos extremos e a infraestrutura de contenção de cheias da cidade.",
-        "coordinators": ["Raí Nunes dos Santos"]
-      }
-    ],
-    "images": [
-      "/Eventos/entre-muros-1.webp",
-      "/Eventos/entre-muros-2.webp",
-      "/Eventos/entre-muros-3.webp",
-      "/Eventos/entre-muros-4.webp"
-    ]
-  }
+	{
+		"slug": "i-workshop-criec",
+		"title": "I Workshop CRIEC",
+		"featured": true,
+		"tags": [
+			"Desastres",
+			"Previsão",
+			"Eventos extremos",
+			"Machine learning",
+			"Visita guiada"
+		],
+		"description": "\tPrimeiro workshop do projeto CRIEC/FAPERGS \"Eventos Climáticos e Desastres no RS: Caracterização e Predição com IA\". O evento reúne pesquisadores para discutir aplicações de inteligência artificial na compreensão e previsão de eventos climáticos extremos no Rio Grande do Sul.\n\tAs apresentações abrangem sistemas de alerta antecipado, machine learning para previsões, análise de vulnerabilidade social, entre outros temas. O workshop culmina com uma visita guiada pelo Centro Histórico de Porto Alegre, explorando a memória dos eventos extremos.",
+		"sessions": [
+			{
+				"title": "Como a IA transforma o Big Data jornalístico em inteligência operacional e resiliência local",
+				"date": "2026-05-13T14:00:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 0,
+				"description": "Proposta de aprimoramento da comunicação em sistemas de alerta antecipado (EWS).",
+				"coordinators": ["Fernando Silva", "Marco Idiart"]
+			},
+			{
+				"title": "O Que os Dados Nos Dizem Sobre Eventos Extremos e Perdas Econômicas",
+				"date": "2026-05-13T14:30:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 0,
+				"description": "Apresentação sobre inteligência territorial e leitura de eventos extremos a partir dos dados, enfatizando as perdas associadas e impactos econômicos.",
+				"coordinators": ["Raí Nunes", "Marco Idiart"]
+			},
+			{
+				"title": "Estimando Impactos de Desastres a Partir de Dados Oficiais",
+				"date": "2026-05-13T15:00:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 0,
+				"description": "Apresentação sobre estimativa de impactos de desastres usando dados oficiais.",
+				"coordinators": ["Maitê Azambuja (UFRGS)", "Marco Idiart"]
+			},
+			{
+				"title": "Lições da Sala de Situação de Pelotas nas Cheias de 2024",
+				"date": "2026-05-13T15:30:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 0,
+				"description": "Relato das ações de modelagem, monitoramento e resposta realizadas na Sala de Situação de Pelotas durante as cheias de 2024, destacando as lições aprendidas, desafios enfrentados e recomendações para gestão de risco e resposta urbana.",
+				"coordinators": ["Daniela Buske", "Régis Quadros", "Marco Idiart"]
+			},
+			{
+				"title": "TideSat: Monitoramento de Nível da Água",
+				"date": "2026-05-14T09:00:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 1,
+				"description": "Apresentação da TideSat sobre monitoramento de nível da água e aplicações para apoio à previsão hidrológica.",
+				"coordinators": ["TideSat"]
+			},
+			{
+				"title": "Modelos de Predição do Nível da Água no Rio Guaíba",
+				"date": "2026-05-14T10:30:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 1,
+				"description": "Sessão sobre a análise comparativa de diferentes modelos de predição do nível da água em rios, incluindo avaliação de desempenho e limites de aplicação.",
+				"coordinators": ["Juliano Almeida Machado", "Daniela Buske"]
+			},
+			{
+				"title": "Infraestrutura de Processamento de Dados para Previsão Hidrológica",
+				"date": "2026-05-14T11:00:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 1,
+				"description": "Discussão sobre infraestrutura de processamento de dados para previsão hidrológica, com Long Short-Term Memory (LSTM).",
+				"coordinators": ["Carlos Henrique Moraes Praia", "Daniela Buske"]
+			},
+			{
+				"title": "Modelagem Hidrológica com Dados Remotos",
+				"date": "2026-05-14T11:30:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 1,
+				"description": "Apresentação sobre modelagem hidrológica com dados remotos, com estudo de caso aplicado ao Rio Piratini (RS).",
+				"coordinators": ["Varlei Barbosa Gonçalves", "Daniela Buske"]
+			},
+			{
+				"title": "Eventos Climáticos Extremos no Rio Grande do Sul",
+				"date": "2026-05-14T14:00:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 2,
+				"description": "Apresentação e caracterização de eventos climáticos extremos no Rio Grande do Sul.",
+				"coordinators": ["Fernanda Batista da Silva", "Carolina Brito"]
+			},
+			{
+				"title": "Detecção de Eventos Extremos em Dados Climáticos",
+				"date": "2026-05-14T14:30:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 2,
+				"description": "Comparação entre métodos estatísticos e modelos de inteligência artificial na detecção de eventos extremos.",
+				"coordinators": ["Amália Garcez", "Carolina Brito"]
+			},
+			{
+				"title": "Quem é Suscetível a um Aviso Antecipado de Desastre?",
+				"date": "2026-05-14T15:00:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 2,
+				"description": "Análises da pesquisa mundial de valores sobre suscetibilidade a aviso antecipado de desastre.",
+				"coordinators": ["Bruna Borba", "Carolina Brito"]
+			},
+			{
+				"title": "Análise da Relação Entre Sensação Térmica e Dengue",
+				"date": "2026-05-14T15:30:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 2,
+				"description": "Análise da relação entre sensação térmica e dengue por meio de Random Forest.",
+				"coordinators": ["Bruno Coelho Bulcão", "Carolina Brito"]
+			},
+			{
+				"title": "Infraestrutura Para Integração de Dados e Suas Aplicações",
+				"date": "2026-05-14T16:00:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 2,
+				"description": "Apresentação das visualizações e das aplicações desenvolvidas, com discussão dos desafios na integração de diferentes bancos de dados.",
+				"coordinators": [
+					"Ricardo Gava Rodrigues Junior",
+					"Maiquel Cavalheiro",
+					"Carolina Brito"
+				]
+			},
+			{
+				"title": "Machine Learning Para Previsão de Séries Temporais de Temperatura",
+				"date": "2026-05-15T09:00:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 3,
+				"description": "Um estudo sobre modelos de machine learning para previsão de séries temporais de temperatura em Porto Alegre.",
+				"coordinators": ["Marcos Perez", "Rita de Cássia Marques Alves"]
+			},
+			{
+				"title": "Redes Neurais Convolucionais na Previsão de Temperatura",
+				"date": "2026-05-15T09:30:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 3,
+				"description": "Apresentação da aplicação de rede neural convolucional na previsão de temperatura em Porto Alegre.",
+				"coordinators": ["Ana Lúcia Antonioli", "Rita de Cássia Marques Alves"]
+			},
+			{
+				"title": "Multilayer Perceptron e Precipitação",
+				"date": "2026-05-15T10:00:00-03:00",
+				"location": "Campus do Vale",
+				"address": "Anfiteatro Antônio Cabral - IF/UFRGS - Campus do Vale",
+				"tag": 3,
+				"description": "Uma análise de desempenho de multilayer Perceptron aplicado à precipitação.",
+				"coordinators": ["Renan Nunes", "Rita de Cássia Marques Alves"]
+			},
+			{
+				"title": "Entre Muros: Desastres, Memórias e Águas",
+				"date": "2026-05-16T09:00:00-03:00",
+				"location": "Centro Histórico de Porto Alegre",
+				"address": "Encontro no Mercado Público - Centro Histórico de Porto Alegre",
+				"tag": 4,
+				"description": "Percurso passando por 9 pontos no Centro Histórico de Porto Alegre, abordando questões da formação da cidade, enchentes, vulnerabilidade e mecanismos de prevenção. Duração aproximada: 1 hora e 30 minutos.",
+				"coordinators": ["Raí Nunes dos Santos"]
+			}
+		],
+		"images": ["/Eventos/workshop.webp"]
+	},
+	{
+		"slug": "entre-muros-desastres-memorias-e-aguas-1",
+		"title": "Entre muros: desastres, memórias e águas",
+		"featured": true,
+		"tags": ["Visita guiada"],
+		"description": "\tUma iniciativa do grupo Clima, Desastres e Inteligência Artificial, financiada pelo edital FAPERGS-CRIEC, propõe um percurso guiado e interativo pelo Centro Histórico de Porto Alegre, com foco na memória dos eventos climáticos extremos e na infraestrutura de contenção de cheias da cidade. A condução é de Raí Nunes dos Santos, Geógrafo, Dr. em Geografia pela UFRGS.\n\tDurante a caminhada, os participantes recebem um mapa-guia impresso para acompanhar uma leitura territorial contínua pelos nove pontos do trajeto, percorrendo a complexa relação entre o espaço urbano e a dinâmica fluvial do Guaíba — incluindo os marcos de até onde a água chegou nas cheias de 1941 e 2024, e as estruturas construídas ao longo das décadas para dotar a cidade de sistemas de proteção.\n\tO trajeto se inicia no Mercado Público e na Avenida Borges de Medeiros, resgatando marcas visíveis e imagens do histórico de inundações. Em seguida, explora a formação socioespacial e logística da cidade na Praça da Alfândega, avançando para a materialidade do sistema de proteção: o muro e a comporta do Portão do Cais Mauá e o funcionamento técnico da Casa de Bombas. A dimensão institucional, simbólica e de poder frente aos desastres é tensionada no eixo da Igreja das Dores e do Comando Militar.\n\tO roteiro também aborda criticamente as novas lógicas de uso do solo, como a Comporta do Cais Embarcadero e as atividades situadas fora do anel de proteção, e as tecnologias de monitoramento representadas pela Régua de Medição no Gasômetro. Por fim, o percurso se encerra no Monumento aos Voluntários, promovendo um debate sobre resiliência, antifragilidade e o papel da sociedade na reconstrução.",
+		"sessions": [
+			{
+				"title": "Percurso guiado pelo Centro Histórico",
+				"date": "2026-04-11T09:00:00-03:00",
+				"location": "Centro Histórico de Porto Alegre",
+				"address": "Mercado Público de Porto Alegre",
+				"tag": 0,
+				"description": "Caminhada de 1h30 por 9 pontos estratégicos do Centro Histórico, abordando a memória dos eventos climáticos extremos e a infraestrutura de contenção de cheias da cidade.",
+				"coordinators": ["Raí Nunes dos Santos"]
+			},
+			{
+				"title": "Percurso guiado pelo Centro Histórico",
+				"date": "2026-04-11T09:00:00-03:00",
+				"location": "Centro Histórico de Porto Alegre",
+				"address": "Mercado Público de Porto Alegre",
+				"tag": 0,
+				"description": "Caminhada de 1h30 por 9 pontos estratégicos do Centro Histórico, abordando a memória dos eventos climáticos extremos e a infraestrutura de contenção de cheias da cidade.",
+				"coordinators": ["Raí Nunes dos Santos"]
+			},
+			{
+				"title": "Percurso guiado pelo Centro Histórico",
+				"date": "2026-04-11T09:00:00-03:00",
+				"location": "Centro Histórico de Porto Alegre",
+				"address": "Mercado Público de Porto Alegre",
+				"tag": 0,
+				"description": "Caminhada de 1h30 por 9 pontos estratégicos do Centro Histórico, abordando a memória dos eventos climáticos extremos e a infraestrutura de contenção de cheias da cidade.",
+				"coordinators": ["Raí Nunes dos Santos"]
+			}
+		],
+		"images": [
+			"/Eventos/entre-muros-1.webp",
+			"/Eventos/entre-muros-2.webp",
+			"/Eventos/entre-muros-3.webp",
+			"/Eventos/entre-muros-4.webp"
+		]
+	}
 ]

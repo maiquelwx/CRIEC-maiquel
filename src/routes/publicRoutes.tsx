@@ -4,7 +4,6 @@ import { PublicationsPage } from "@/pages/PublicationsPage"
 import { EventPage } from "@/pages/EventPage"
 import { NotFoundPage } from "@/pages/404Page"
 
-
 export const publicRoutes = [
 	{
 		index: true,
@@ -12,8 +11,9 @@ export const publicRoutes = [
 		handle: {
 			seo: {
 				title: "CRIEC | Estudos Climáticos",
-				description: "Integrando dados meteorológicos, sociais e de desastres para mapear vulnerabilidades, identificar padrões e apoiar a resiliência climática no Rio Grande do Sul.",
-			}
+				description:
+					"Integrando dados meteorológicos, sociais e de desastres para mapear vulnerabilidades, identificar padrões e apoiar a resiliência climática no Rio Grande do Sul.",
+			},
 		},
 	},
 	{
@@ -21,15 +21,15 @@ export const publicRoutes = [
 		handle: {
 			seo: {
 				title: "Atividades | CRIEC",
-				description: "Acompanhe eventos, projetos e atividades desenvolvidas pelo CRIEC.",
-			}
+				description:
+					"Acompanhe eventos, projetos e atividades desenvolvidas pelo CRIEC.",
+			},
 		},
 		children: [
 			{
 				path: ":slug",
 				element: <EventPage />,
 			},
-
 		],
 	},
 	{
@@ -38,8 +38,9 @@ export const publicRoutes = [
 		handle: {
 			seo: {
 				title: "Publicações | CRIEC",
-				description: "Artigos, relatórios e produções científicas do CRIEC sobre clima, vulnerabilidade, riscos e desastres.",
-			}
+				description:
+					"Artigos, relatórios e produções científicas do CRIEC sobre clima, vulnerabilidade, riscos e desastres.",
+			},
 		},
 	},
 	{
@@ -55,7 +56,7 @@ export const publicRoutes = [
 				handle: {
 					seo: {
 						title: "Previsões | CRIEC",
-					}
+					},
 				},
 			},
 			{
@@ -64,7 +65,7 @@ export const publicRoutes = [
 				handle: {
 					seo: {
 						title: "Desastres | CRIEC",
-					}
+					},
 				},
 			},
 		],
@@ -75,8 +76,9 @@ export const publicRoutes = [
 		handle: {
 			seo: {
 				title: "Equipe | CRIEC",
-				description: "Conheça a equipe de pesquisadores e colaboradores do CRIEC.",
-			}
+				description:
+					"Conheça a equipe de pesquisadores e colaboradores do CRIEC.",
+			},
 		},
 	},
 	{
@@ -86,7 +88,7 @@ export const publicRoutes = [
 			seo: {
 				title: "404 | CRIEC",
 				description: "Página não encontrada.",
-			}
+			},
 		},
 	},
 ]

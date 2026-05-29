@@ -14,11 +14,10 @@ import {
 import { useEvents } from "@/hooks/useEvents"
 
 function DeskNav() {
-
 	const featuredEvents = useEvents({
 		featured: true,
 	})
-	
+
 	return (
 		<NavigationMenu
 			viewport={false}
@@ -35,13 +34,8 @@ function DeskNav() {
 					<NavigationMenuTrigger>Atividades</NavigationMenuTrigger>
 					<NavigationMenuContent className="min-w-56 p-2">
 						{featuredEvents.map((event) => (
-							<NavigationMenuLink
-								key={event.slug}
-								asChild
-							>
-								<Link to={`/atividades/${event.slug}`}>
-									{event.title}
-								</Link>
+							<NavigationMenuLink key={event.slug} asChild>
+								<Link to={`/atividades/${event.slug}`}>{event.title}</Link>
 							</NavigationMenuLink>
 						))}
 					</NavigationMenuContent>
@@ -73,7 +67,7 @@ function DeskNav() {
 	)
 }
 
-export function Navbar() {
+function Navbar() {
 	const { theme, setTheme } = useTheme()
 
 	return (
@@ -108,3 +102,5 @@ export function Navbar() {
 		</header>
 	)
 }
+
+export default Navbar
