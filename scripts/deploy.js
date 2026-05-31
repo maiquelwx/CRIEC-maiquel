@@ -1,12 +1,10 @@
 /**
  * - verifica estado do repositório
  * - interrompe e sai se tiverem modificações unstaged
- * - verifica versão, tags e commits
- * - se HEAD tag existe e é != versão interrompe e sai
  * - vai pra branch prod
- * - realiza squash merge, agrupando commits
- * - commita o merge e faz o push
- * - volra pra branch main
+ * - avança prod até o estado atual da main (fast-forward)
+ * - faz push para o repositório remoto
+ * - volta para a branch main
  */
 
 import { execSync } from "node:child_process"
@@ -53,54 +51,11 @@ try {
 	)
 }
 
-// Lê a versão atual do pacote
-const packageJson = JSON.parse(fs.readFileSync("package.json", "utf-8"))
-
-const version = packageJson.version
-
-// hash curto do HEAD
-const currentHash = git("rev-parse --short HEAD")
-// tag atual do HEAD, se existir
-const currentTag = git("tag --points-at HEAD")
-
-/**
- * Verifica se a tag atual corresponde
- * à versão declarada no package.json.
- *
- * Se existir divergência:
- * - o deploy é interrompido
- */
-if (currentTag && currentTag !== `v${version}`) {
-	console.error(
-		`\n✗ Deploy cancelado: a tag atual (${currentTag}) não corresponde à versão(v${version}).\n`
-	)
-
-	process.exit(1)
-}
-
-/**
- * Mensagem do commit de deploy.
- *
- * Normalmente:
- * - deploy v0.2.0
- *
- * Se existirem commits depois da última versão:
- * - deploy v0.2.0 +(a1b2c3d)
- */
-let deployMessage = `deploy v${version}`
-
-if (!currentTag) {
-	deployMessage += ` +(${currentHash})`
-}
-
 // Troca para a branch de produção.
 git("checkout prod")
 
-// Faz squash merge da main na prod.
-git("merge --squash main")
-
-// Cria commit de deploy.
-git(`commit -m "${deployMessage}"`)
+// Avança a branch prod até o estado atual da main.
+git("merge --ff-only main")
 
 // Envia a branch prod para o remoto.
 git("push origin prod")

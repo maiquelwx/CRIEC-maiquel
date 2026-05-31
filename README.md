@@ -40,12 +40,6 @@ Instale as dependências:
 npm install
 ```
 
-Copie o arquivo de exemplo e preencha as variáveis:
-
-```bash
-cp .env.example .env
-```
-
 Inicie o ambiente local:
 
 ```bash
@@ -97,11 +91,9 @@ npm run deploy
 O script de deploy [(scripts/deploy.js)](scripts/deploy.js):
 
 1. Verifica se existem alterações não commitadas.
-2. Confirma que a versão do `package.json` corresponde à tag do `HEAD`(se existir).
-3. Atualiza a branch `prod` usando um squash merge da `main`.
-4. Cria um commit de deploy.
-5. Faz push para o repositório remoto.
-6. Retorna para a branch `main`.
+2. Atualiza a branch `prod` usando fast-forward merge da `main`.
+3. Faz push para o repositório remoto.
+4. Retorna para a branch `main`.
 
 ### Post-build
 
