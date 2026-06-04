@@ -1,6 +1,7 @@
+import 'dotenv/config'
 import fs from "fs"
 
-const SITE_URL = process.env.VITE_SITE_URL
+const SITE_URL = process.env.SITE_URL
 
 // SITEMAP REGISTRY
 const SITEMAPS = ["/sitemap-static.xml", "/sitemap-events.xml"]
