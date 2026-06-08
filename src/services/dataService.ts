@@ -1,4 +1,4 @@
-import type { GeoJsonObject, FeatureCollection } from "geojson"
+import type { FeatureCollection } from "geojson"
 
 // Camadas disponíveis 
 export interface CamadaConfig {
@@ -80,18 +80,28 @@ const CADUNICO_PERIODOS: CadUnicoPeriodo[] = Array.from(
     return {
       id: ano,
       label: ano,
-      fonte: "/src/data/json/CadUnico_RS_Completo.geojson",
+      fonte: "/data/json/cadunico_preview.geojson",
+      //fonte: "/src/data/json/CadUnico_RS_Completo.geojson",
     }
   }
 )
 
-// Em FONTES_LOCAIS, adicionar os novos arquivos .json
+// Arquivos originais (não funcionam após o build)
+// const FONTES_LOCAIS: Record<string, string> = {
+//   municipios: "/src/data/json/Divisão_Municipal_RS.geojson",
+//   bacias: "/src/data/json/Regiões_Hidrográficas_RS.geojson",
+//   curvas_nivel: "/src/data/json/curvas_nivel_preview.json",
+//   localidades: "/src/data/json/loc_cidade_p.json",
+//   area_afetada_2024: "/src/data/json/area_diretamente_atingida_2024.json",
+// }
+
+// Arquivos usados na versão de preview (public/data/json)
 const FONTES_LOCAIS: Record<string, string> = {
-  municipios:     "/src/data/json/Divisão_Municipal_RS.geojson",
-  bacias:         "/src/data/json/Regiões_Hidrográficas_RS.geojson",
-  curvas_nivel:   "/src/data/json/curvas_nivel_preview.json",      // MultiLineString
-  localidades:    "/src/data/json/loc_cidade_p.json",     // Point
-  area_afetada_2024: "/src/data/json/area_diretamente_atingida_2024.json",   // Polygon
+  municipios: "/data/json/municipios_preview.geojson",
+  bacias: "/data/json/bacias_preview.geojson",
+  curvas_nivel: "/data/json/curvas_nivel_preview.json",
+  localidades: "/data/json/localidades_preview.json",
+  area_afetada_2024: "/data/json/area_afetada_2024_preview.json",
 }
 
 // Essa é a única função q o mapa chama
@@ -111,7 +121,7 @@ function obterFonteCadUnico(periodo: string) {
 export async function fetchCamada(
   id: string,
   periodoCadUnico = CADUNICO_PERIODOS[0].id
-): Promise<GeoJsonObject> {
+): Promise<FeatureCollection> {
   const url =
     id === "cadunico"
       ? obterFonteCadUnico(periodoCadUnico)

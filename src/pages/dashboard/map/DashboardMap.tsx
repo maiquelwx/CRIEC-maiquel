@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet"
 import { useMap } from "react-leaflet"
-import type { GeoJsonObject, FeatureCollection } from "geojson"
+import type { FeatureCollection } from "geojson"
 import { fetchCamada, CAMADAS_DISPONIVEIS } from "@/services/dataService"
 import L from "leaflet"
 
@@ -38,7 +38,7 @@ const LegendaCadUnico = () => (
 
 export function DashboardMap({ camadas, opacidade, periodoCadUnico }: DashboardMapProps) {
 
-const [dados, setDados] = useState<Record<string, GeoJsonObject>>({})
+const [dados, setDados] = useState<Record<string, FeatureCollection>>({})
 const [carregando, setCarregando] = useState<Record<string, boolean>>({})
 const [erros, setErros] = useState<Record<string, boolean>>({})
 const [renderKey, setRenderKey] = useState(0)
@@ -166,7 +166,7 @@ useEffect(() => {
           if (!cdMun) return
 
           // Calcular centroide aproximado do município (média das coordenadas)
-          const coords = mun.geometry?.coordinates
+          const coords = (mun.geometry as any)?.coordinates
           if (!coords || coords.length === 0) return
 
           let totalLat = 0, totalLng = 0, count = 0
@@ -188,7 +188,7 @@ useEffect(() => {
 
           // Verificar qual bacia contém o centroide
           for (const bacia of bacias.features) {
-            const baciaCoords = bacia.geometry?.coordinates
+            const baciaCoords = (bacia.geometry as any)?.coordinates
             if (baciaCoords && pointInPolygon(centroide, baciaCoords)) {
               municipioBacia[cdMun] = bacia.properties?.regiao || 'Desconhecida'
               break
@@ -434,10 +434,7 @@ function ZoomControl() {
                 style={(feature) => estiloCamada("bacias_combinado", feature)}
                 onEachFeature={(feature, layer) => {
                   // Forçar aplicação do estilo após renderização
-                  if (layer.setStyle) {
-                    const estilo = estiloCamada("bacias_combinado", feature)
-                    layer.setStyle(estilo)
-                  }
+                  (layer as L.Path).setStyle(estiloCamada("bacias_combinado", feature))
                   
                   if (feature.properties) {
                     const props = feature.properties
