@@ -10,6 +10,7 @@ import {
 	CarouselPrevious,
 } from "@/components/ui/carousel"
 import { useParams } from "react-router-dom"
+import Markdown from "@/components/Markdown"
 import { useEvents } from "@/hooks/useEvents"
 import { NotFoundPage } from "./404Page"
 
@@ -41,9 +42,7 @@ export function EventPage() {
 				{/* Left Column: Description and Images */}
 				<div className="flex flex-col gap-4 lg:col-span-1">
 					<div className="px-2 py-1 lg:px-3">
-						<p className="text-sm leading-relaxed whitespace-pre-wrap lg:text-base">
-							{event.description}
-						</p>
+						<Markdown>{event.description}</Markdown>
 					</div>
 
 					{event.images && event.images.length > 0 && (
