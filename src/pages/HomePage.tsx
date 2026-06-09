@@ -65,15 +65,15 @@ function SobreProjeto() {
 					className="absolute top-[2%] left-[28%] z-20 h-[38%] w-[44%] cursor-pointer"
 				/>
 
-				{/* Região esquerda — Vulnerabilidade */}
+				{/* Região esquerda — Vulnerabilidadee */}
 				<Link
 					to="/dashboard?view=vulnerabilidade"
 					className="absolute top-[46%] left-[14%] z-20 h-[30%] w-[26%] cursor-pointer rounded-full transition"
 				/>
 
-				{/* Região direita — Desastres */}
+				{/* Região direita — Riscos */}
 				<Link
-					to="/dashboard?view=desastres"
+					to="/dashboard?view=risco"
 					className="absolute top-[46%] right-[14%] z-20 h-[30%] w-[26%] cursor-pointer rounded-full transition"
 				/>
 			</div>

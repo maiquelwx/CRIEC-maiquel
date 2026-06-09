@@ -2,7 +2,14 @@ import { useEffect, useState } from "react"
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet"
 import { useMap } from "react-leaflet"
 import type { FeatureCollection } from "geojson"
-import { fetchCamada, CAMADAS_DISPONIVEIS } from "@/services/dataService"
+import { fetchCamada } from "@/services/dataService"
+import {
+  getLayerKey,
+  buildCadUnicoMap,
+  combineMunicipiosWithCadUnico,
+  combineBaciasWithCadUnico,
+} from "./mapHelpers"
+import { estiloCamada } from "./styleHelpers"
 import L from "leaflet"
 
 interface DashboardMapProps {
@@ -38,233 +45,69 @@ const LegendaCadUnico = () => (
 
 export function DashboardMap({ camadas, opacidade, periodoCadUnico }: DashboardMapProps) {
 
-const [dados, setDados] = useState<Record<string, FeatureCollection>>({})
-const [carregando, setCarregando] = useState<Record<string, boolean>>({})
-const [erros, setErros] = useState<Record<string, boolean>>({})
-const [renderKey, setRenderKey] = useState(0)
+  const [dados, setDados] = useState<Record<string, FeatureCollection>>({})
+  const [carregando, setCarregando] = useState<Record<string, boolean>>({})
+  const [erros, setErros] = useState<Record<string, boolean>>({})
+  const [renderKey, setRenderKey] = useState(0)
 
-function carregarCamada(id: string, key: string) {
-  setCarregando((ant) => ({ ...ant, [key]: true }))
-  fetchCamada(id, periodoCadUnico)
-    .then((json) => {
-      setDados((ant) => ({ ...ant, [key]: json }))
-    })
-    .catch((err) => {
-      console.error(`Erro ao carregar camada "${id}" (key="${key}"):`, err)
-      setErros((ant) => ({ ...ant, [key]: true }))
-    })
-    .finally(() => {
-      setCarregando((ant) => ({ ...ant, [key]: false }))
-    })
-}
-
-useEffect(() => {
-  // Carregar camadas visíveis
-  camadas.forEach((id) => {
-    const key = id === "cadunico" ? `${id}:${periodoCadUnico}` : id
-    if (dados[key] || carregando[key] || erros[key]) return
-    carregarCamada(id, key)
-  })
-
-  // Carregar municípios implicitamente se bacias + cadunico estão selecionadas
-  if (camadas.includes("bacias") && camadas.includes("cadunico") && !dados["municipios"] && !carregando["municipios"] && !erros["municipios"]) {
-    carregarCamada("municipios", "municipios")
+  function carregarCamada(id: string, key: string) {
+    setCarregando((ant) => ({ ...ant, [key]: true }))
+    fetchCamada(id, periodoCadUnico)
+      .then((json) => {
+        setDados((ant) => ({ ...ant, [key]: json }))
+      })
+      .catch((err) => {
+        console.error(`Erro ao carregar camada "${id}" (key="${key}"):`, err)
+        setErros((ant) => ({ ...ant, [key]: true }))
+      })
+      .finally(() => {
+        setCarregando((ant) => ({ ...ant, [key]: false }))
+      })
   }
 
-    // Se municipios + cadunico estão selecionadas, criar visualização combinada por município
+  useEffect(() => {
+    camadas.forEach((id) => {
+      const key = getLayerKey(id, periodoCadUnico)
+      if (dados[key] || carregando[key] || erros[key]) return
+      carregarCamada(id, key)
+    })
+
+    if (camadas.includes("bacias") && camadas.includes("cadunico") && !dados["municipios"] && !carregando["municipios"] && !erros["municipios"]) {
+      carregarCamada("municipios", "municipios")
+    }
+
     if (camadas.includes("municipios") && camadas.includes("cadunico")) {
       const keyMunicipios = "municipios"
-      const keyCadUnico = `cadunico:${periodoCadUnico}`
+      const keyCadUnico = getLayerKey("cadunico", periodoCadUnico)
       const keyCombinado = `combinado:${periodoCadUnico}`
 
       if (dados[keyMunicipios] && dados[keyCadUnico] && !dados[keyCombinado] && !carregando[keyCombinado]) {
         setCarregando((ant) => ({ ...ant, [keyCombinado]: true }))
-
         const municipios = dados[keyMunicipios] as FeatureCollection
         const cadunico = dados[keyCadUnico] as FeatureCollection
-
-        // Criar mapa de CD_MUN para dados do CadÚnico para eficiência
-        const cadUnicoMap: Record<string, any> = {}
-        cadunico.features.forEach((feature: any) => {
-          const cdMun = feature.properties?.codarea
-          if (cdMun) {
-            cadUnicoMap[String(cdMun)] = feature.properties
-          }
-        })
-
-        // Combinar: geometria dos municípios com dados do CadÚnico
-        const combinado: FeatureCollection = {
-          type: "FeatureCollection",
-          features: municipios.features
-            .map((municipio: any) => {
-              const cdMun = municipio.properties?.CD_MUN
-              const dadosCadUnico = cadUnicoMap[String(cdMun)]
-              return dadosCadUnico ? {
-                ...municipio,
-                properties: {
-                  ...municipio.properties,
-                  ...dadosCadUnico,
-                },
-              } : null
-            })
-            .filter(Boolean), // Remove nulls
-        }
+        const combinado = combineMunicipiosWithCadUnico(municipios, buildCadUnicoMap(cadunico))
 
         setDados((ant) => ({ ...ant, [keyCombinado]: combinado }))
         setCarregando((ant) => ({ ...ant, [keyCombinado]: false }))
       }
     }
 
-    // Se bacias + cadunico estão selecionadas, criar visualização combinada por bacia
     if (camadas.includes("bacias") && camadas.includes("cadunico")) {
       const keyBacias = "bacias"
       const keyMunicipios = "municipios"
-      const keyCadUnico = `cadunico:${periodoCadUnico}`
+      const keyCadUnico = getLayerKey("cadunico", periodoCadUnico)
       const keyCombinado = `bacias_combinado:${periodoCadUnico}`
 
-      // Precisamos de municípios para fazer o mapeamento CadÚnico → Município → Bacia
       if (dados[keyBacias] && dados[keyMunicipios] && dados[keyCadUnico] && !dados[keyCombinado] && !carregando[keyCombinado]) {
         setCarregando((ant) => ({ ...ant, [keyCombinado]: true }))
 
         const bacias = dados[keyBacias] as FeatureCollection
         const municipios = dados[keyMunicipios] as FeatureCollection
         const cadunico = dados[keyCadUnico] as FeatureCollection
-
-        // Função para verificar se um ponto está dentro de um polígono (ray casting)
-        function pointInPolygon(point: [number, number], polygonCoords: any): boolean {
-          // Para Polygon: coordinates = [[ring]]
-          // Para MultiPolygon: coordinates = [[[ring1]], [[ring2]]]
-          let rings: number[][][] = []
-          if (Array.isArray(polygonCoords[0][0][0])) {
-            // MultiPolygon
-            rings = polygonCoords.flat()
-          } else {
-            // Polygon
-            rings = polygonCoords
-          }
-
-          const [x, y] = point
-          let inside = false
-          for (const ring of rings) {
-            let j = ring.length - 1
-            for (let i = 0; i < ring.length; i++) {
-              const [xi, yi] = ring[i]
-              const [xj, yj] = ring[j]
-              if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) {
-                inside = !inside
-              }
-              j = i
-            }
-          }
-          return inside
-        }
-
-        // Criar mapa: CD_MUN -> baciaNome
-        const municipioBacia: Record<string, string> = {}
-        municipios.features.forEach((mun: any) => {
-          const cdMun = mun.properties?.CD_MUN
-          if (!cdMun) return
-
-          // Calcular centroide aproximado do município (média das coordenadas)
-          const coords = (mun.geometry as any)?.coordinates
-          if (!coords || coords.length === 0) return
-
-          let totalLat = 0, totalLng = 0, count = 0
-          const traverse = (arr: any) => {
-            if (Array.isArray(arr[0]) && typeof arr[0][0] === 'number') {
-              arr.forEach(([lng, lat]: [number, number]) => {
-                totalLat += lat
-                totalLng += lng
-                count++
-              })
-            } else {
-              arr.forEach(traverse)
-            }
-          }
-          traverse(coords)
-
-          if (count === 0) return
-          const centroide: [number, number] = [totalLng / count, totalLat / count]
-
-          // Verificar qual bacia contém o centroide
-          for (const bacia of bacias.features) {
-            const baciaCoords = (bacia.geometry as any)?.coordinates
-            if (baciaCoords && pointInPolygon(centroide, baciaCoords)) {
-              municipioBacia[cdMun] = bacia.properties?.regiao || 'Desconhecida'
-              break
-            }
-          }
-        })
-
-
-        const estatisticasPorBacia: Record<string, any> = {}
-
-        // Agrupar CadÚnico por município para evitar duplicação
-        const cadunicoPorMunicipio: Record<string, any> = {}
-        cadunico.features.forEach((feature: any) => {
-          const cdMun = feature.properties?.codarea
-          if (!cdMun || cadunicoPorMunicipio[cdMun]) return // Skip duplicatas
-          cadunicoPorMunicipio[cdMun] = feature.properties
-        })
-
-        // Contar populações por bacia
-        Object.entries(cadunicoPorMunicipio).forEach(([cdMun, props]: [string, any]) => {
-          const baciaNome = municipioBacia[cdMun] || "Desconhecida"
-
-          if (!estatisticasPorBacia[baciaNome]) {
-            estatisticasPorBacia[baciaNome] = {
-              municipios: 0,
-              populacaoTotal: 0,
-              faixa1Total: 0,
-              faixa1e2Total: 0,
-              taxas: []
-            }
-          }
-
-          const stats = estatisticasPorBacia[baciaNome]
-          stats.municipios += 1
-          stats.populacaoTotal += props.Populacao || 0
-          stats.faixa1Total += props.Faixa_1 || 0
-          stats.faixa1e2Total += props.Faixa_1_e_2 || 0
-          stats.taxas.push(props.Taxa_Faixa_1_e_2 || 0)
-        })
-
-        // Calcular médias por bacia
-        Object.keys(estatisticasPorBacia).forEach(baciaNome => {
-          const stats = estatisticasPorBacia[baciaNome]
-          stats.taxaMediaFaixa1e2 = stats.taxas.length > 0 ? stats.taxas.reduce((a: number, b: number) => a + b, 0) / stats.taxas.length : 0
-          stats.taxaFaixa1Media = stats.populacaoTotal > 0 ? (stats.faixa1Total / stats.populacaoTotal) * 100 : 0
-        })
-
-        // Combinar com geometria das bacias
-        const combinado: FeatureCollection = {
-          type: "FeatureCollection",
-          features: bacias.features.map((bacia: any) => {
-            const baciaNome = bacia.properties?.regiao
-            const stats = estatisticasPorBacia[baciaNome] || {
-              municipios: 0,
-              populacaoTotal: 0,
-              taxaMediaFaixa1e2: 0,
-              faixa1Total: 0,
-              faixa1e2Total: 0,
-            }
-
-            return {
-              ...bacia,
-              properties: {
-                ...bacia.properties,
-                municipios: stats.municipios,
-                populacaoTotal: stats.populacaoTotal,
-                taxaMediaFaixa1e2: stats.taxaMediaFaixa1e2,
-                faixa1Total: stats.faixa1Total,
-                faixa1e2Total: stats.faixa1e2Total,
-              },
-            }
-          }),
-        }
+        const combinado = combineBaciasWithCadUnico(bacias, municipios, cadunico)
 
         setDados((ant) => ({ ...ant, [keyCombinado]: combinado }))
-        setRenderKey(k => k + 1)
+        setRenderKey((k) => k + 1)
         setCarregando((ant) => ({ ...ant, [keyCombinado]: false }))
       }
     }
@@ -293,59 +136,6 @@ function ZoomControl() {
     </div>
   )
 }
-
-  function estiloCamada(id: string, feature?: any): any {
-  // Para CadÚnico ou visualização combinada, estilo baseado na taxa de pobreza
-  if ((id === "cadunico" || id === "combinado" || id === "bacias_combinado") && feature?.properties) {
-      const taxa = id === "bacias_combinado" ? feature.properties.taxaMediaFaixa1e2 : feature.properties.Taxa_Faixa_1_e_2
-
-      // Se não há dados do CadÚnico, usar cor neutra
-      if (taxa === undefined || taxa === null) {
-        return {
-          color: "#6b7280",
-          weight: 0.5,
-          fillColor: "#f3f4f6",
-          fillOpacity: 0.3 * opacidade,
-          opacity: opacidade,
-        }
-      }
-
-      // Escala de cores baseada na taxa de pobreza
-      let color = "#10b981" // verde baixa
-      if (taxa >= 15 && taxa <= 25) color = "#f59e0b" // amarelo média
-      if (taxa > 25) color = "#ef4444" // vermelho alta
-
-      return {
-        color: "#000000",
-        weight: 0.5,
-        fillColor: color,
-        fillOpacity: 0.9 * opacidade,
-        opacity: opacidade,
-      }
-    }
-
-    // Estilo padrão para outras camadas
-    const config = CAMADAS_DISPONIVEIS[id]
-    if (!config) return {
-      color: "#3388ff",
-      weight: 0.5,
-      fillOpacity: 0.3 * opacidade,
-      opacity: opacidade,
-    }
-
-    const estilo = config.estilo as {
-      color?: string
-      weight?: number
-      fillOpacity?: number
-      opacity?: number
-    }
-
-    return {
-      ...estilo,
-      fillOpacity: (estilo.fillOpacity ?? 0.3) * opacidade,
-      opacity: estilo.opacity ?? opacidade,
-    }
-  }
 
   const estaCarregando = Object.values(carregando).some(Boolean)
   const camadasComErro = Object.entries(erros).filter(([, v]) => v).map(([k]) => k)
@@ -390,7 +180,7 @@ function ZoomControl() {
               <GeoJSON
                 key={keyCombinado}
                 data={dados[keyCombinado]}
-                style={(feature) => estiloCamada("cadunico", feature)}
+                style={(feature) => estiloCamada("cadunico", opacidade, feature)}
                 onEachFeature={(feature, layer) => {
                   if (feature.properties) {
                     const props = feature.properties
@@ -431,10 +221,10 @@ function ZoomControl() {
               <GeoJSON
                 key={`${keyCombinado}-${renderKey}`}
                 data={dados[keyCombinado]}
-                style={(feature) => estiloCamada("bacias_combinado", feature)}
+                style={(feature) => estiloCamada("bacias_combinado", opacidade, feature)}
                 onEachFeature={(feature, layer) => {
                   // Forçar aplicação do estilo após renderização
-                  (layer as L.Path).setStyle(estiloCamada("bacias_combinado", feature))
+                  (layer as L.Path).setStyle(estiloCamada("bacias_combinado", opacidade, feature))
                   
                   if (feature.properties) {
                     const props = feature.properties
@@ -459,12 +249,12 @@ function ZoomControl() {
               <GeoJSON
                 key={key}
                 data={dados[key]}
-                style={(feature) => estiloCamada(id, feature)}
+                style={(feature) => estiloCamada(id, opacidade, feature)}
                 pointToLayer={(feature, latlng) => {
                   // Renderiza pontos como círculos (estilizáveis via style())
                   return L.circleMarker(latlng, {
                     radius: 3,
-                    ...estiloCamada(id, feature),
+                    ...estiloCamada(id, opacidade, feature),
                   })
                 }}
                 onEachFeature={id === "cadunico" ? (feature, layer) => {

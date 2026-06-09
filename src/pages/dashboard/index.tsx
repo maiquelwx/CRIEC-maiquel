@@ -1,35 +1,21 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { DashboardMap } from "./map/DashboardMap"
-import { LayerMenu } from "./map/LayerMenu"
+import { LayerMenu } from "./components/LayerMenu"
 import { obterPeriodosCadUnico } from "@/services/dataService"
-
-const CONFIG = {
-  clima: {
-    label: "Clima",
-    camadasIniciais: ["bacias"],
-  },
-  vulnerabilidade: {
-    label: "Vulnerabilidade",
-    camadasIniciais: ["municipios", "cadunico"],
-  },
-  desastres: {
-    label: "Desastres",
-    camadasIniciais: ["municipios", "area_afetada_2024"],
-  },
-} as const
-
-type ViewKey = keyof typeof CONFIG
+import { CONFIG, type ViewKey } from "./dashboardConfig"
 
 export function DashboardPage() {
   const [searchParams] = useSearchParams()
   const view = (searchParams.get("view") ?? "clima") as ViewKey
   const config = CONFIG[view] ?? CONFIG.clima
 
+  const periodosCadUnico = useMemo(() => obterPeriodosCadUnico(), [])
+
   const [slots, setSlots] = useState<string[]>([...config.camadasIniciais])
   const [opacidadeCamadas, setOpacidadeCamadas] = useState(0.5)
   const [periodoCadUnico, setPeriodoCadUnico] = useState(
-    () => obterPeriodosCadUnico()[0].id
+    () => periodosCadUnico[0].id
   )
 
   function setSlot(slot: number, id: string) {
@@ -69,7 +55,7 @@ export function DashboardPage() {
           opacidade={opacidadeCamadas}
           onOpacityChange={setOpacidadeCamadas}
           periodoCadUnico={periodoCadUnico}
-          periodosCadUnico={obterPeriodosCadUnico()}
+          periodosCadUnico={periodosCadUnico}
           onPeriodoCadUnicoChange={setPeriodoCadUnico}
         />
       </main>

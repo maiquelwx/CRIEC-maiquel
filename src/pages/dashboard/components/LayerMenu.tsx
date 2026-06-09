@@ -1,12 +1,11 @@
-import { CAMADAS_DISPONIVEIS } from "@/services/dataService"
-
-interface CadUnicoPeriodo {
-  id: string
-  label: string
-}
+import { useMemo } from "react"
+import { CAMADAS_DISPONIVEIS, BASE_LAYER_IDS } from "@/services/dataService"
+import type { CadUnicoPeriodo } from "@/services/dataService"
+import { Select } from "@/components/ui/select"
+import { Slider } from "@/components/ui/slider"
 
 interface LayerMenuProps {
-  slots: string[]  // array limitada em até 3 ids, ex: ["municipios", "bacias", ""]
+  slots: string[] // array limitada em até 3 ids, ex: ["municipios", "bacias", ""]
   onSetSlot: (slot: number, id: string) => void
   onLimparSlot: (slot: number) => void
   opacidade: number
@@ -26,21 +25,16 @@ function OpacitySlider({
   onChange: (v: number) => void
 }) {
   return (
-    <div className="mb-4 space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-3">
-      <div className="flex items-center justify-between text-[11px] text-slate-500">
-        <span>Transparência</span>
-        <span>{Math.round(value * 100)}%</span>
-      </div>
-      <input
-        type="range"
-        min={0.2}
-        max={1}
-        step={0.05}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-primary"
-      />
-    </div>
+    <Slider
+      label="Transparência"
+      valueLabel={`${Math.round(value * 100)}%`}
+      min={0.2}
+      max={1}
+      step={0.05}
+      value={value}
+      onChange={(e) => onChange(Number(e.target.value))}
+      containerClassName="mb-4 rounded-xl border border-border bg-card p-3"
+    />
   )
 }
 
@@ -57,28 +51,21 @@ function CadUnicoPeriodSelector({
   disabled: boolean
 }) {
   return (
-    <div className="mb-4 space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-3">
-      <div className="flex items-center justify-between text-[11px] text-slate-500">
-        <span>Período CadÚnico</span>
-      </div>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        disabled={disabled}
-        className="w-full rounded-lg border border-slate-200 bg-white/90 px-3 py-2 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:bg-slate-100"
-      >
-        {options.map((periodo) => (
-          <option key={periodo.id} value={periodo.id}>
-            {periodo.label}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Select
+      label="Período CadÚnico"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      disabled={disabled}
+      containerClassName="mb-4 rounded-xl border border-border bg-card p-3"
+    >
+      {options.map((periodo) => (
+        <option key={periodo.id} value={periodo.id}>
+          {periodo.label}
+        </option>
+      ))}
+    </Select>
   )
 }
-
-// Camadas de base (slot 0) — divisões territoriais e relevo
-const IDS_BASE = ["municipios", "bacias", "curvas_nivel"]
 
 /** 3 selects de camada — slot 0 só mostra bases, slots 1-2 mostram as demais */
 function LayerSelects({
@@ -90,9 +77,19 @@ function LayerSelects({
   onSet: (slot: number, id: string) => void
   onLimpar: (slot: number) => void
 }) {
-  const todasCamadas = Object.values(CAMADAS_DISPONIVEIS)
-  const camadasBase      = todasCamadas.filter((c) =>  IDS_BASE.includes(c.id))
-  const camadasTematicas = todasCamadas.filter((c) => !IDS_BASE.includes(c.id))
+  const todasCamadas = useMemo(
+    () => Object.values(CAMADAS_DISPONIVEIS),
+    []
+  )
+
+  const camadasBase = useMemo(
+    () => todasCamadas.filter((c) => BASE_LAYER_IDS.includes(c.id as any)),
+    [todasCamadas]
+  )
+  const camadasTematicas = useMemo(
+    () => todasCamadas.filter((c) => !BASE_LAYER_IDS.includes(c.id as any)),
+    [todasCamadas]
+  )
 
   return (
     <div className="mb-4 flex flex-col gap-2">
@@ -117,13 +114,13 @@ function LayerSelects({
               className="inline-block h-2.5 w-2.5 shrink-0 rounded-full transition-colors"
               style={{ backgroundColor: corAtual }}
             />
-            <select
+            <Select
               value={valorAtual}
               onChange={(e) => {
                 if (e.target.value === "") onLimpar(slot)
                 else onSet(slot, e.target.value)
               }}
-              className="flex-1 rounded-lg border border-slate-200 bg-white/90 px-2 py-1.5 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+              className="flex-1"
             >
               <option value="">— nenhuma —</option>
               {opcoesFiltradas.map((c) => (
@@ -131,7 +128,7 @@ function LayerSelects({
                   {c.label}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
         )
       })}

@@ -14,6 +14,9 @@ export interface CadUnicoPeriodo {
   fonte: string
 }
 
+export const BASE_LAYER_IDS = ["municipios", "bacias", "curvas_nivel"] as const
+export type BaseLayerId = (typeof BASE_LAYER_IDS)[number]
+
 export const CAMADAS_DISPONIVEIS: Record<string, CamadaConfig> = {
   municipios: {
     id: "municipios",
@@ -44,34 +47,44 @@ export const CAMADAS_DISPONIVEIS: Record<string, CamadaConfig> = {
     },
   },
   // Em CAMADAS_DISPONIVEIS, registrar cada uma:
-curvas_nivel: {
-  id: "curvas_nivel",
-  label: "Curvas de Nível",
-  estilo: {
-    color: "#8b5cf6",
-    weight: 1,
-    opacity: 0.6,
+  curvas_nivel: {
+    id: "curvas_nivel",
+    label: "Curvas de Nível",
+    estilo: {
+      color: "#8b5cf6",
+      weight: 1,
+      opacity: 0.6,
+    },
   },
-},
-localidades: {
-  id: "localidades",
-  label: "Localidades",
-  estilo: {
-    color: "#f43f5e",
-    weight: 1,
-    fillOpacity: 0.8,
+  localidades: {
+    id: "localidades",
+    label: "Localidades",
+    estilo: {
+      color: "#f43f5e",
+      weight: 1,
+      fillOpacity: 0.8,
+    },
   },
-},
-area_afetada_2024: {
-  id: "area_afetada_2024",
-  label: "Área Afetada 2024",
-  estilo: {
-    color: "#f59e0b",
-    weight: 1,  
-    fillOpacity: 0.3,
+  area_afetada_2024: {
+    id: "area_afetada_2024",
+    label: "Área Afetada 2024",
+    estilo: {
+      color: "#f59e0b",
+      weight: 1,
+      fillOpacity: 0.3,
+    },
   },
-},
 }
+
+export const obterCamadasBase = () =>
+  Object.values(CAMADAS_DISPONIVEIS).filter((c) =>
+    BASE_LAYER_IDS.includes(c.id as BaseLayerId)
+  )
+
+export const obterCamadasTematicas = () =>
+  Object.values(CAMADAS_DISPONIVEIS).filter(
+    (c) => !BASE_LAYER_IDS.includes(c.id as BaseLayerId)
+  )
 
 const CADUNICO_PERIODOS: CadUnicoPeriodo[] = Array.from(
   { length: new Date().getFullYear() - 2012 + 1 },
@@ -128,19 +141,16 @@ export async function fetchCamada(
       : FONTES_LOCAIS[id]
   if (!url) throw new Error(`Camada "${id}" não encontrada`)
 
-  // PARA:
   const res = await fetch(url)
   if (!res.ok) throw new Error(`Erro ao carregar camada "${id}": ${res.status}`)
 
   const json: FeatureCollection = await res.json()
 
-  // Curvas de nível são muito pesadas, limitando para não travar o browser
   if (id === "curvas_nivel") {
     console.warn(`curvas_nivel: ${json.features.length} features — limitando a 100 para preview`)
     return { ...json, features: json.features.slice(0, 100) }
   }
 
-  // Para CadÚnico, filtra por ano baseado no atributo "Referencia" (formato "MM/YYYY")
   let filtrado = json
   if (id === "cadunico") {
     filtrado = {
@@ -149,12 +159,11 @@ export async function fetchCamada(
         const referencia = feature.properties?.Referencia as string
         if (!referencia) return false
 
-        // Extrai o ano do formato "MM/YYYY"
         const ano = referencia.split("/")[1]
         return ano === periodoCadUnico
       }),
     }
-  } 
+  }
 
   return filtrado
 }
