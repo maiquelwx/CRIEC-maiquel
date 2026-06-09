@@ -94,7 +94,7 @@ function PartnersMarquee() {
 			: theme
 
 	return (
-		<Marquee pauseOnHover fade className="py-4">
+		<Marquee pauseOnHover fade duration={15} className="py-2">
 			{partners.map((partner) => {
 				const [logoSrc, fallbackSrc] =
 					themeSuffix === "dark"
@@ -104,16 +104,23 @@ function PartnersMarquee() {
 					<div key={partner.name} className="flex">
 						<HoverCard openDelay={450} closeDelay={200}>
 							<HoverCardTrigger asChild>
-								<img
-									src={logoSrc}
-									alt={partner.name}
-									onError={(event) => {
-										const target = event.currentTarget
-										target.onerror = null
-										target.src = fallbackSrc
-									}}
-									className="h-36 rounded-2xl p-3 opacity-75 transition-opacity hover:bg-popover hover:opacity-100 md:mx-2"
-								/>
+								<a
+									href={partner.website}
+									target="_blank"
+									rel="noopener"
+									className="block"
+								>
+									<img
+										src={logoSrc}
+										alt={partner.name}
+										onError={(event) => {
+											const target = event.currentTarget
+											target.onerror = null
+											target.src = fallbackSrc
+										}}
+										className="h-36 max-w-64 rounded-2xl p-3 opacity-75 transition-opacity hover:bg-popover hover:opacity-100"
+									/>
+								</a>
 							</HoverCardTrigger>
 							<HoverCardContent className="w-fit px-3 py-2 font-heading">
 								{partner.name}
