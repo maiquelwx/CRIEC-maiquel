@@ -229,7 +229,7 @@
 				"tag": 0,
 				"description": "Uso de um Perceptron Multicamadas (MLP) treinado com dados ERA5 para prever precipitação no Sul do Brasil. Avalia acurácia em diferentes horizontes e limitações na captura de eventos extremos.",
 				"coordinators": ["Renan Nunes", "Marco Idiart", "Carolina Brito"],
-				"links": [{"label": "Link de teste", "url": "https://example.com"}]
+				"links": [{ "label": "Link de teste", "url": "https://example.com" }]
 			},
 			{
 				"title": "Análise Comparativa de Modelos de ML para Previsão Meteorológica",
@@ -239,7 +239,7 @@
 				"tag": 1,
 				"description": "Comparação prática entre modelos (XGBoost, LSTM) para previsão de temperaturas em Porto Alegre, analisando janelas temporais, métricas de erro e robustez em cenários variados.",
 				"coordinators": ["Marcos Perez", "Marco Idiart", "Carolina Brito"],
-				"links": [{"label": "Link de teste", "url": "https://example.com"}]
+				"links": [{ "label": "Link de teste", "url": "https://example.com" }]
 			},
 			{
 				"title": "Previsão de Temperatura Média Diária com CNN e Dados Climáticos Históricos",
@@ -248,8 +248,13 @@
 				"address": "Rua Prof. Edmundo March, Niterói - RJ, 24210-330, Brasil",
 				"tag": 2,
 				"description": "Aplicação de CNNs a campos da reanálise ERA5 para prever a temperatura média diária em Porto Alegre, examinando o impacto de escalas espaciais e janelas temporais na performance.",
-				"coordinators": ["Ana Lúcia Antonioli", "Marcos Perez", "Marco Idiart", "Carolina Brito"],
-				"links": [{"label": "Link de teste", "url": "https://example.com"}]
+				"coordinators": [
+					"Ana Lúcia Antonioli",
+					"Marcos Perez",
+					"Marco Idiart",
+					"Carolina Brito"
+				],
+				"links": [{ "label": "Link de teste", "url": "https://example.com" }]
 			},
 			{
 				"title": "Comparação entre Métodos Estatísticos e ML para Detecção de Eventos Extremos Climáticos",
@@ -258,10 +263,21 @@
 				"address": "Rua Prof. Edmundo March, Niterói - RJ, 24210-330, Brasil",
 				"tag": 3,
 				"description": "Comparação entre métodos estatísticos e técnicas de ML (por exemplo, autoencoders LSTM) para detectar e caracterizar eventos climáticos extremos no Brasil (1940–2020), destacando vantagens e limitações de cada abordagem.",
-				"coordinators": ["Amália B. Garcez", "Marcos Perez", "Marco Idiart", "Carolina Brito"],
-				"links": [{"label": "Link de teste", "url": "https://example.com"}]
+				"coordinators": [
+					"Amália B. Garcez",
+					"Marcos Perez",
+					"Marco Idiart",
+					"Carolina Brito"
+				],
+				"links": [{ "label": "Link de teste", "url": "https://example.com" }]
 			}
 		],
-		"images": ["/Eventos/ws-ai4ccam-2026-1.webp", "/Eventos/ws-ai4ccam-2026-2.webp", "/Eventos/ws-ai4ccam-2026-3.webp", "/Eventos/ws-ai4ccam-2026-4.webp", "/Eventos/ws-ai4ccam-2026-5.webp"]
+		"images": [
+			"/Eventos/ws-ai4ccam-2026-1.webp",
+			"/Eventos/ws-ai4ccam-2026-2.webp",
+			"/Eventos/ws-ai4ccam-2026-3.webp",
+			"/Eventos/ws-ai4ccam-2026-4.webp",
+			"/Eventos/ws-ai4ccam-2026-5.webp"
+		]
 	}
 ]

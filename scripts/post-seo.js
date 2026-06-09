@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import "dotenv/config"
 import fs from "fs"
 
 const SITE_URL = process.env.SITE_URL

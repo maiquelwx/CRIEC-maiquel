@@ -133,7 +133,7 @@ function SessionCard({
 													href={link.url}
 													target="_blank"
 													rel="noopener noreferrer"
-													className="text-accent underline-offset-2 hover:underline hover:bg-foreground/15"
+													className="text-accent underline-offset-2 hover:bg-foreground/15 hover:underline"
 												>
 													{link.label ?? link.url}
 												</a>

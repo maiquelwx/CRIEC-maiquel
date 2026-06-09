@@ -14,6 +14,7 @@ function Footer() {
 		{ label: "Publicações", to: "/publicacoes" },
 		{ label: "Equipe", to: "/equipe" },
 	]
+	void navigationLinks
 
 	const socialLinks = [
 		{ icon: FaGithub, label: "GitHub", href: "#" },
@@ -54,11 +55,13 @@ function Footer() {
 		{ label: "404", path: "/rota-inexistente" },
 		{ label: "Route Error", path: "/design-system?triggerRouteError=true" },
 	]
+	void temporaryPageLinks
 	{
 		/* FIM REMOVER */
 	}
 
-	const linkClass = "text-sm text-muted-foreground transition-colors hover:text-foreground"
+	const linkClass =
+		"text-sm text-muted-foreground transition-colors hover:text-foreground"
 
 	return (
 		<footer className="mt-16 border-t border-border/60 bg-background">
@@ -93,7 +96,7 @@ function Footer() {
 					</div>
 
 					{/* Navigation Links */}
-{/* 					<div className="flex flex-col gap-3">
+					{/* 					<div className="flex flex-col gap-3">
 						<h3 className="text-sm font-semibold">Navegação</h3>
 						<ul className="space-y-2">
 							{navigationLinks.map((link) => (
@@ -172,10 +175,7 @@ function Footer() {
 						<ul className="space-y-2">
 							{legalLinks.map((item) => (
 								<li key={item.to}>
-									<Link
-										to={item.to}
-										className={linkClass}
-									>
+									<Link to={item.to} className={linkClass}>
 										{item.label}
 									</Link>
 								</li>

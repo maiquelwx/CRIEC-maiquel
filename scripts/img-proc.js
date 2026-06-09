@@ -10,7 +10,7 @@ const stat = await fs.stat(input)
 if (!stat.isFile() && !stat.isDirectory()) {
 	throw new Error("Invalid input")
 }
- 
+
 if (!Number.isInteger(size) || size <= 0) {
 	throw new Error("Invalid size")
 }
@@ -19,18 +19,14 @@ if (!Number.isInteger(size) || size <= 0) {
 // Mapeia os caminhos de acordo
 const files = stat.isFile()
 	? [input]
-	: (await fs.readdir(input))
-		.map(file => path.join(input, file))
+	: (await fs.readdir(input)).map((file) => path.join(input, file))
 
 const outputDirectory = path.join(input, "processed")
 await fs.mkdir(outputDirectory)
 
 for (const file of files) {
 	const filename = path.parse(file).name
-	const outputFile = path.join(
-		outputDirectory,
-		`${filename}.webp`
-	)
+	const outputFile = path.join(outputDirectory, `${filename}.webp`)
 
 	console.log(`Processing ${file}`)
 

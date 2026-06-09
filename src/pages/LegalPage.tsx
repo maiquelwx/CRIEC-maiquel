@@ -30,10 +30,10 @@ export function LegalPage() {
 
 	return (
 		<section className="mx-auto max-w-5xl">
-			<h1 className="my-10 py-5 px-3 font-heading font-semibold text-6xl border-b-2">
+			<h1 className="my-10 border-b-2 px-3 py-5 font-heading text-6xl font-semibold">
 				{document.title}
 			</h1>
-			<div className="px-10 bg-card rounded-2xl border border-ring">
+			<div className="rounded-2xl border border-ring bg-card px-10">
 				<Markdown>{document.content}</Markdown>
 			</div>
 		</section>
