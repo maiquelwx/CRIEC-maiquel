@@ -28,6 +28,7 @@ interface Session {
 	tag?: number
 	description?: string
 	coordinators?: string[]
+	links?: { label?: string; url: string }[]
 }
 
 const tagVariants = [
@@ -118,6 +119,25 @@ function SessionCard({
 									<ul className="list-inside list-disc">
 										{session.coordinators.map((coordinator) => (
 											<li key={coordinator}>{coordinator}</li>
+										))}
+									</ul>
+								</div>
+							)}
+							{session.links && session.links.length > 0 && (
+								<div>
+									<p className="font-semibold text-foreground">Links:</p>
+									<ul className="list-inside list-disc">
+										{session.links.map((link) => (
+											<li key={link.url}>
+												<a
+													href={link.url}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="text-accent underline-offset-2 hover:underline hover:bg-foreground/15"
+												>
+													{link.label ?? link.url}
+												</a>
+											</li>
 										))}
 									</ul>
 								</div>
