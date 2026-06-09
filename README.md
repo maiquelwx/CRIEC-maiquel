@@ -64,6 +64,20 @@ Caso alguma etapa falhe, o processo é interrompido.
 
 ---
 
+### Imagens para o frontend
+
+Quando precisar tratar imagens que vão para o frontend, use o script de processamento:
+
+```bash
+npm run image -- <pasta-de-imagens> <tamanho-em-pixels>
+```
+
+Esse comando usa o script [`img-proc.js`](scripts/img-proc.js) que, entre outras coisas, redimensiona e converte as imagens para `.webp`.
+
+Use esse fluxo quando quiser preparar imagens para o frontend, reduzindo peso e padronizando o formato final sem precisar processar tudo manualmente.
+
+---
+
 Para atualizar a versão do projeto:
 
 ```bash
