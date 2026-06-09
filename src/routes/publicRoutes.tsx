@@ -2,9 +2,11 @@ import { HomePage } from "@/pages/HomePage"
 import { MembersPage } from "@/pages/MembersPage"
 import { PublicationsPage } from "@/pages/PublicationsPage"
 import { EventPage } from "@/pages/EventPage"
+import { LegalPage } from "@/pages/LegalPage"
 import { NotFoundPage } from "@/pages/404Page"
 
 export const publicRoutes = [
+	// Home
 	{
 		index: true,
 		element: <HomePage />,
@@ -16,6 +18,7 @@ export const publicRoutes = [
 			},
 		},
 	},
+	// Eventos
 	{
 		path: "atividades",
 		handle: {
@@ -27,11 +30,16 @@ export const publicRoutes = [
 		},
 		children: [
 			{
+				index: true,
+				element: <NotFoundPage />,
+			},
+			{
 				path: ":slug",
 				element: <EventPage />,
 			},
 		],
 	},
+	// Publicações
 	{
 		path: "publicacoes",
 		element: <PublicationsPage />,
@@ -43,6 +51,7 @@ export const publicRoutes = [
 			},
 		},
 	},
+	// Linhas de pesquisa
 	{
 		path: "linhas",
 		children: [
@@ -70,6 +79,7 @@ export const publicRoutes = [
 			},
 		],
 	},
+	// Pesquisadores
 	{
 		path: "equipe",
 		element: <MembersPage />,
@@ -81,6 +91,28 @@ export const publicRoutes = [
 			},
 		},
 	},
+	// Termos legais
+	{
+		path: "legal",
+		handle: {
+			seo: {
+				title: "Legal | CRIEC",
+				description:
+					"Apresenta os termos, limitações, e políticas de uso de aplicações do CRIEC.",
+			},
+		},
+		children: [
+			{
+				index: true,
+				element: <NotFoundPage />,
+			},
+			{
+				path: ":slug",
+				element: <LegalPage />,
+			},
+		],
+	},
+	// 404
 	{
 		path: "*",
 		element: <NotFoundPage />,
