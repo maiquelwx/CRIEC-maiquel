@@ -2,12 +2,13 @@ import { useEffect, useState } from "react"
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet"
 import { useMap } from "react-leaflet"
 import type { FeatureCollection } from "geojson"
-import { fetchCamada } from "@/services/dataService"
+import { fetchCamada, CAMADAS_DISPONIVEIS } from "@/services/dataService"
 import {
   getLayerKey,
   buildCadUnicoMap,
   combineMunicipiosWithCadUnico,
   combineBaciasWithCadUnico,
+  combineTwoLayers,
 } from "./mapHelpers"
 import { estiloCamada } from "./styleHelpers"
 import L from "leaflet"
@@ -48,7 +49,6 @@ export function DashboardMap({ camadas, opacidade, periodoCadUnico }: DashboardM
   const [dados, setDados] = useState<Record<string, FeatureCollection>>({})
   const [carregando, setCarregando] = useState<Record<string, boolean>>({})
   const [erros, setErros] = useState<Record<string, boolean>>({})
-  const [renderKey, setRenderKey] = useState(0)
 
   function carregarCamada(id: string, key: string) {
     setCarregando((ant) => ({ ...ant, [key]: true }))
@@ -63,6 +63,94 @@ export function DashboardMap({ camadas, opacidade, periodoCadUnico }: DashboardM
       .finally(() => {
         setCarregando((ant) => ({ ...ant, [key]: false }))
       })
+  }
+
+  const getPointToLayer = (id: string) => {
+    const config = CAMADAS_DISPONIVEIS[id]
+    if (config?.geometry !== "ponto") return undefined
+
+    return (feature: any, latlng: L.LatLng) =>
+      L.circleMarker(latlng, estiloCamada(id, opacidade, feature))
+  }
+
+  const formatTooltipValue = (value: any) => {
+    if (value === null || value === undefined) return "–"
+    if (typeof value === "number") return Number.isFinite(value) ? value.toLocaleString() : String(value)
+    if (typeof value === "boolean") return value ? "Sim" : "Não"
+    if (Array.isArray(value)) return value.join(", ")
+    if (typeof value === "object") return JSON.stringify(value)
+    return String(value)
+  }
+
+  const normalizeTooltipKey = (key: string) =>
+    key
+      .replace(/_/g, " ")
+      .replace(/([a-z])([A-Z])/g, "$1 $2")
+      .replace(/\b([a-z])/g, (match) => match.toUpperCase())
+
+  const buildFeatureTooltip = (id: string, feature: any) => {
+    const props = feature?.properties
+    if (!props || typeof props !== "object") return undefined
+
+    const primaryLabel =
+      props.Municipio || props.NM_MUN || props.Nome || props.nome || props.name || props.regiao || props.localidade || props.LOCALIDADE
+    const config = CAMADAS_DISPONIVEIS[id]
+    const layerName = config?.label || id
+
+    const lines: string[] = [`<b>${primaryLabel || layerName}</b>`]
+
+    if (id === "cadunico") {
+      const populacao = props.Populacao
+      const faixa1 = props.Faixa_1
+      const taxaFaixa1 = props.Taxa_Faixa_1
+      const faixa1e2 = props.Faixa_1_e_2
+      const taxaFaixa1e2 = props.Taxa_Faixa_1_e_2
+
+      if (populacao !== undefined) {
+        lines.push(`População: ${formatTooltipValue(populacao)}`)
+      }
+      if (faixa1 !== undefined && taxaFaixa1 !== undefined) {
+        lines.push(`Faixa 1: ${formatTooltipValue(faixa1)} (${formatTooltipValue(taxaFaixa1)}%)`)
+      }
+      if (faixa1e2 !== undefined && taxaFaixa1e2 !== undefined) {
+        lines.push(`Faixa 1+2: ${formatTooltipValue(faixa1e2)} (${formatTooltipValue(taxaFaixa1e2)}%)`)
+      }
+      return lines.length > 1 ? lines.join("<br/>") : undefined
+    }
+
+    const specialPropertyKeys = [
+      "municipio",
+      "nm_mun",
+      "nome",
+      "name",
+      "regiao",
+      "populacao",
+      "Area",
+      "area",
+      "id",
+    ]
+
+    const entries = Object.entries(props)
+      .filter(([key]) => key !== "geometry" && key !== "type")
+      .sort(([a], [b]) => {
+        const aIndex = specialPropertyKeys.indexOf(a.toLowerCase())
+        const bIndex = specialPropertyKeys.indexOf(b.toLowerCase())
+        if (aIndex === -1 && bIndex === -1) return a.localeCompare(b)
+        if (aIndex === -1) return 1
+        if (bIndex === -1) return -1
+        return aIndex - bIndex
+      })
+      .slice(0, 8)
+
+    entries.forEach(([key, value]) => {
+      if (key === "Municipio" || key === "NM_MUN" || key === "Nome" || key === "nome" || key === "name" || key === "regiao" || key === "localidade" || key === "LOCALIDADE") {
+        return
+      }
+      if (value === null || value === undefined || value === "") return
+      lines.push(`${normalizeTooltipKey(key)}: ${formatTooltipValue(value)}`)
+    })
+
+    return lines.length > 1 ? lines.join("<br/>") : undefined
   }
 
   useEffect(() => {
@@ -107,12 +195,22 @@ export function DashboardMap({ camadas, opacidade, periodoCadUnico }: DashboardM
         const combinado = combineBaciasWithCadUnico(bacias, municipios, cadunico)
 
         setDados((ant) => ({ ...ant, [keyCombinado]: combinado }))
-        setRenderKey((k) => k + 1)
         setCarregando((ant) => ({ ...ant, [keyCombinado]: false }))
       }
     }
   }, [camadas, periodoCadUnico, dados, carregando])
 
+  const combinedTwoLayers = camadas.length === 2
+    ? (() => {
+        const [idA, idB] = camadas
+        const keyA = getLayerKey(idA, periodoCadUnico)
+        const keyB = getLayerKey(idB, periodoCadUnico)
+        const dadosA = dados[keyA]
+        const dadosB = dados[keyB]
+        if (!dadosA || !dadosB) return null
+        return combineTwoLayers(idA, idB, dadosA, dadosB)
+      })()
+    : null
 
 function ZoomControl() {
   const map = useMap()
@@ -172,75 +270,23 @@ function ZoomControl() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         />
 
-        {camadas.includes("municipios") && camadas.includes("cadunico") ? (
-          // Visualização combinada municípios + cadunico
-          (() => {
-            const keyCombinado = `combinado:${periodoCadUnico}`
-            return dados[keyCombinado] ? (
-              <GeoJSON
-                key={keyCombinado}
-                data={dados[keyCombinado]}
-                style={(feature) => estiloCamada("cadunico", opacidade, feature)}
-                onEachFeature={(feature, layer) => {
-                  if (feature.properties) {
-                    const props = feature.properties
-                    const municipioNome = props.NM_MUN || props.Municipio
-                    const populacao = props.Populacao
-                    const faixa1 = props.Faixa_1
-                    const taxaFaixa1 = props.Taxa_Faixa_1
-                    const faixa1e2 = props.Faixa_1_e_2
-                    const taxaFaixa1e2 = props.Taxa_Faixa_1_e_2
-
-                    let tooltip = `<b>${municipioNome}</b>`
-
-                    if (populacao !== undefined) {
-                      tooltip += `<br/>População: ${populacao.toLocaleString()}`
-                    }
-
-                    if (faixa1 !== undefined && taxaFaixa1 !== undefined) {
-                      tooltip += `<br/>Faixa 1: ${faixa1} (${taxaFaixa1.toFixed(1)}%)`
-                    }
-
-                    if (faixa1e2 !== undefined && taxaFaixa1e2 !== undefined) {
-                      tooltip += `<br/>Faixa 1+2: ${faixa1e2} (${taxaFaixa1e2.toFixed(1)}%)`
-                    } else {
-                      tooltip += `<br/><i>Sem dados do CadÚnico</i>`
-                    }
-
-                    layer.bindTooltip(tooltip)
-                  }
-                }}
-              />
-            ) : null
-          })()
-        ) : camadas.includes("bacias") && camadas.includes("cadunico") ? (
-          // Visualização combinada bacias + cadunico
-          (() => {
-            const keyCombinado = `bacias_combinado:${periodoCadUnico}`
-            return dados[keyCombinado] ? (
-              <GeoJSON
-                key={`${keyCombinado}-${renderKey}`}
-                data={dados[keyCombinado]}
-                style={(feature) => estiloCamada("bacias_combinado", opacidade, feature)}
-                onEachFeature={(feature, layer) => {
-                  // Forçar aplicação do estilo após renderização
-                  (layer as L.Path).setStyle(estiloCamada("bacias_combinado", opacidade, feature))
-                  
-                  if (feature.properties) {
-                    const props = feature.properties
-                    const tooltip = `
-                      <b>Bacia ${props.regiao}</b><br/>
-                      Municípios: ${props.municipios || 0}<br/>
-                      População total: ${(props.populacaoTotal || 0).toLocaleString()}<br/>
-                      Taxa média pobreza: ${(props.taxaMediaFaixa1e2 || 0).toFixed(1)}%<br/>
-                      Famílias Faixa 1+2: ${props.faixa1e2Total || 0}
-                    `
-                    layer.bindTooltip(tooltip)
-                  }
-                }}
-              />
-            ) : null
-          })()
+        {combinedTwoLayers ? (
+          <GeoJSON
+            key={`combined:${camadas.join(",")}`}
+            data={combinedTwoLayers.combined}
+            style={(feature) => estiloCamada(combinedTwoLayers.primaryId, opacidade, feature)}
+            pointToLayer={
+              CAMADAS_DISPONIVEIS[combinedTwoLayers.primaryId]?.geometry === "ponto"
+                ? getPointToLayer(combinedTwoLayers.primaryId)
+                : undefined
+            }
+            onEachFeature={(feature, layer) => {
+              const tooltip = buildFeatureTooltip(combinedTwoLayers.primaryId, feature)
+              if (tooltip) {
+                layer.bindTooltip(tooltip)
+              }
+            }}
+          />
         ) : (
           // Visualização separada das camadas
           camadas.map((id) => {
@@ -250,25 +296,13 @@ function ZoomControl() {
                 key={key}
                 data={dados[key]}
                 style={(feature) => estiloCamada(id, opacidade, feature)}
-                pointToLayer={(feature, latlng) => {
-                  // Renderiza pontos como círculos (estilizáveis via style())
-                  return L.circleMarker(latlng, {
-                    radius: 3,
-                    ...estiloCamada(id, opacidade, feature),
-                  })
-                }}
-                onEachFeature={id === "cadunico" ? (feature, layer) => {
-                  if (feature.properties) {
-                    const props = feature.properties
-                    const tooltip = `
-                      <b>${props.Municipio}</b><br/>
-                      População: ${props.Populacao?.toLocaleString()}<br/>
-                      Faixa 1: ${props.Faixa_1} (${props.Taxa_Faixa_1?.toFixed(1)}%)<br/>
-                      Faixa 1+2: ${props.Faixa_1_e_2} (${props.Taxa_Faixa_1_e_2?.toFixed(1)}%)
-                    `
+                pointToLayer={getPointToLayer(id)}
+                onEachFeature={(feature, layer) => {
+                  const tooltip = buildFeatureTooltip(id, feature)
+                  if (tooltip) {
                     layer.bindTooltip(tooltip)
                   }
-                } : undefined}
+                }}
               />
             ) : null
           })

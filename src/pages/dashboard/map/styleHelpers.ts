@@ -30,11 +30,13 @@ export function estiloCamada(id: string, opacidade: number, feature?: any): any 
   }
 
   const config = CAMADAS_DISPONIVEIS[id]
-  if (!config) return {
-    color: "#3388ff",
-    weight: 0.5,
-    fillOpacity: 0.3 * opacidade,
-    opacity: opacidade,
+  if (!config) {
+    return {
+      color: "#3388ff",
+      weight: 0.5,
+      fillOpacity: 0.3 * opacidade,
+      opacity: opacidade,
+    }
   }
 
   const estilo = config.estilo as {
@@ -44,9 +46,34 @@ export function estiloCamada(id: string, opacidade: number, feature?: any): any 
     opacity?: number
   }
 
-  return {
+  const estiloBase = {
     ...estilo,
-    fillOpacity: (estilo.fillOpacity ?? 0.3) * opacidade,
     opacity: estilo.opacity ?? opacidade,
+  }
+
+  switch (config.geometry) {
+    case "linha":
+      return {
+        ...estiloBase,
+        fillOpacity: 0,
+        weight: estiloBase.weight ?? 1,
+      }
+
+    case "ponto":
+      return {
+        ...estiloBase,
+        radius: 3,
+        fillOpacity: (estiloBase.fillOpacity ?? 0.8) * opacidade,
+        weight: estiloBase.weight ?? 1,
+      }
+
+    case "area":
+    case "desconhecido":
+    default:
+      return {
+        ...estiloBase,
+        fillOpacity: (estiloBase.fillOpacity ?? 0.3) * opacidade,
+        weight: estiloBase.weight ?? 1,
+      }
   }
 }
