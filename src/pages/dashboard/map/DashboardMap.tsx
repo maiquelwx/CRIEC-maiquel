@@ -129,9 +129,23 @@ export function DashboardMap({ camadas, opacidade, periodoCadUnico }: DashboardM
       "area",
       "id",
     ]
+    const nomesVariaveis: Record<string, string> = {
+      V0001: "Total de pessoas",
+      V0002: "Total de domicílios",
+      V0003: "Total de domicílios particulares",
+      V0004: "Total de domicílios coletivos",
+      V0005: "Média de moradores por domicílio",
+      V0006: "% de domicílios ocupados imputados",
+      V0007: "Total de domicílios particulares ocupados",
+    }
+
+    const isUninterestingProperty = (key: string) =>
+      key === "geometry" ||
+      key === "type" ||
+      (/^CD_/i.test(key) && !["CD_MUN"].includes(key.toUpperCase()))
 
     const entries = Object.entries(props)
-      .filter(([key]) => key !== "geometry" && key !== "type")
+      .filter(([key, value]) => !isUninterestingProperty(key) && value !== null && value !== undefined && value !== "")
       .sort(([a], [b]) => {
         const aIndex = specialPropertyKeys.indexOf(a.toLowerCase())
         const bIndex = specialPropertyKeys.indexOf(b.toLowerCase())
@@ -140,14 +154,15 @@ export function DashboardMap({ camadas, opacidade, periodoCadUnico }: DashboardM
         if (bIndex === -1) return -1
         return aIndex - bIndex
       })
-      .slice(0, 8)
+      .slice(0, 16)
 
     entries.forEach(([key, value]) => {
       if (key === "Municipio" || key === "NM_MUN" || key === "Nome" || key === "nome" || key === "name" || key === "regiao" || key === "localidade" || key === "LOCALIDADE") {
         return
       }
-      if (value === null || value === undefined || value === "") return
-      lines.push(`${normalizeTooltipKey(key)}: ${formatTooltipValue(value)}`)
+      lines.push(
+        `${nomesVariaveis[key.toUpperCase()] ?? normalizeTooltipKey(key)}: ${formatTooltipValue(value)}`
+      )
     })
 
     return lines.length > 1 ? lines.join("<br/>") : undefined

@@ -21,6 +21,8 @@ export type BaseLayerId = (typeof BASE_LAYER_IDS)[number]
 export const CAMADAS_DISPONIVEIS: Record<string, CamadaConfig> = {
   municipios: { id: "municipios", label: "Municípios", estilo: { color: "#3b82f6", weight: 1, fillOpacity: 0.15 }, geometry: "area" },
   bacias: { id: "bacias", label: "Bacias Hidrográficas", estilo: { color: "#10b981", weight: 2, fillOpacity: 0.2 }, geometry: "area" },
+  setores_censitarios: { id: "setores_censitarios", label: "Setores Censitários", estilo: { color: "#10b981", weight: 2, fillOpacity: 0.2 }, geometry: "area" },
+  setores_censitarios_local: { id: "setores_censitarios_local", label: "Setores Censitários - Local", estilo: { color: "#10b981", weight: 2, fillOpacity: 0.2 }, geometry: "area" },
   cadunico: { id: "cadunico", label: "CadÚnico", temporal: true, estilo: { color: "#f59e0b", weight: 1, fillOpacity: 0.15 }, geometry: "area" },
   curvas_nivel: { id: "curvas_nivel", label: "Curvas de Nível", estilo: { color: "#8b5cf6", weight: 1, opacity: 0.6 }, geometry: "linha" },
   localidades: { id: "localidades", label: "Localidades", estilo: { color: "#f43f5e", weight: 1, fillOpacity: 0.8 }, geometry: "ponto" },
@@ -224,9 +226,14 @@ const FONTES_LOCAIS: Record<string, string> = {
   curvas_nivel:      "/data/json/curvas_nivel_preview.json",
   localidades:       "/data/json/localidades_preview.json",
   area_afetada_2024: "/data/json/area_afetada_2024_preview.json",
+  setores_censitarios_local: "/data/json/setores_RS.geojson",
 
   // ── IEDE-RS: camadas remotas ──────────────────────────────────────────────
   aeroportos: "https://iede.rs.gov.br/server/rest/services/ATLAS/Aeroportos_em_Operacao_no_Rio_Grande_do_Sul/FeatureServer/0/query?where=1=1&outFields=*&f=geojson",
+
+   // ── IBGE: setores censitários ───────────────────────────────────────────────
+  setores_censitarios:
+  `https://geoservicos.ibge.gov.br/geoserver/CGMAT/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=CGMAT:pbqg22_26_SetoresCensitarios_SetoresCensitarios&outputFormat=application/json&CQL_FILTER=cd_mun='4314902'`,
 
   // --- Risco e ocorrências de desastres naturais (ATLAS_DESASTRE_NATURAIS) ---
   danos_hum_chuva_inten_2017_2022: "https://iede.rs.gov.br/server/rest/services/ATLAS_DESASTRE_NATURAIS/Danos_Hum_Chuva_inten_2017_2022/FeatureServer/0/query?where=1=1&outFields=*&f=geojson",
