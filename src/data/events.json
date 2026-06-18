@@ -30,7 +30,12 @@
 				"tag": 0,
 				"description": "Apresentação sobre inteligência territorial e leitura de eventos extremos a partir dos dados, enfatizando as perdas associadas e impactos econômicos.",
 				"coordinators": ["Raí Nunes", "Marco Idiart"],
-				"links": []
+				"links": [
+					{
+						"label": "Slides da apresentação",
+						"url": "/Eventos/workshop-RNSantos.pdf"
+					}
+				]
 			},
 			{
 				"title": "Estimando Impactos de Desastres a Partir de Dados Oficiais",
@@ -100,7 +105,12 @@
 				"tag": 2,
 				"description": "Apresentação e caracterização de eventos climáticos extremos no Rio Grande do Sul.",
 				"coordinators": ["Fernanda Batista da Silva", "Carolina Brito"],
-				"links": []
+				"links": [
+					{
+						"label": "Slides da apresentação",
+						"url": "/Eventos/workshop-FBatista.pdf"
+					}
+				]
 			},
 			{
 				"title": "Detecção de Eventos Extremos em Dados Climáticos",
@@ -120,7 +130,12 @@
 				"tag": 2,
 				"description": "Análises da pesquisa mundial de valores sobre suscetibilidade a aviso antecipado de desastre.",
 				"coordinators": ["Bruna Borba", "Carolina Brito"],
-				"links": []
+				"links": [
+					{
+						"label": "Slides da apresentação",
+						"url": "/Eventos/workshop-BSBorba.pdf"
+					}
+				]
 			},
 			{
 				"title": "Análise da Relação Entre Sensação Térmica e Dengue",
@@ -154,7 +169,12 @@
 				"tag": 3,
 				"description": "Um estudo sobre modelos de machine learning para previsão de séries temporais de temperatura em Porto Alegre.",
 				"coordinators": ["Marcos Perez", "Rita de Cássia Marques Alves"],
-				"links": []
+				"links": [
+					{
+						"label": "Slides da apresentação",
+						"url": "/Eventos/workshop-MPLeiva.pdf"
+					}
+				]
 			},
 			{
 				"title": "Redes Neurais Convolucionais na Previsão de Temperatura",
@@ -164,7 +184,12 @@
 				"tag": 3,
 				"description": "Apresentação da aplicação de rede neural convolucional na previsão de temperatura em Porto Alegre.",
 				"coordinators": ["Ana Lúcia Antonioli", "Rita de Cássia Marques Alves"],
-				"links": []
+				"links": [
+					{
+						"label": "Slides da apresentação",
+						"url": "/Eventos/workshop-ALAntonioli.pdf"
+					}
+				]
 			},
 			{
 				"title": "Multilayer Perceptron e Precipitação",
@@ -174,7 +199,12 @@
 				"tag": 3,
 				"description": "Uma análise de desempenho de multilayer Perceptron aplicado à precipitação.",
 				"coordinators": ["Renan Nunes", "Rita de Cássia Marques Alves"],
-				"links": []
+				"links": [
+					{
+						"label": "Slides da apresentação",
+						"url": "/Eventos/workshop-RONunes.pdf"
+					}
+				]
 			},
 			{
 				"title": "Entre Muros: Desastres, Memórias e Águas",
@@ -229,7 +259,12 @@
 				"tag": 0,
 				"description": "Uso de um Perceptron Multicamadas (MLP) treinado com dados ERA5 para prever precipitação no Sul do Brasil. Avalia acurácia em diferentes horizontes e limitações na captura de eventos extremos.",
 				"coordinators": ["Renan Nunes", "Marco Idiart", "Carolina Brito"],
-				"links": [{ "label": "Link de teste", "url": "https://example.com" }]
+				"links": [
+					{
+						"label": "PDF Poster",
+						"url": "/Eventos/ws-ai4ccam-2026-RONunes.pdf"
+					}
+				]
 			},
 			{
 				"title": "Análise Comparativa de Modelos de ML para Previsão Meteorológica",
@@ -239,7 +274,12 @@
 				"tag": 1,
 				"description": "Comparação prática entre modelos (XGBoost, LSTM) para previsão de temperaturas em Porto Alegre, analisando janelas temporais, métricas de erro e robustez em cenários variados.",
 				"coordinators": ["Marcos Perez", "Marco Idiart", "Carolina Brito"],
-				"links": [{ "label": "Link de teste", "url": "https://example.com" }]
+				"links": [
+					{
+						"label": "PDF Poster",
+						"url": "/Eventos/ws-ai4ccam-2026-MPLeiva.pdf"
+					}
+				]
 			},
 			{
 				"title": "Previsão de Temperatura Média Diária com CNN e Dados Climáticos Históricos",
@@ -254,7 +294,12 @@
 					"Marco Idiart",
 					"Carolina Brito"
 				],
-				"links": [{ "label": "Link de teste", "url": "https://example.com" }]
+				"links": [
+					{
+						"label": "PDF Poster",
+						"url": "/Eventos/ws-ai4ccam-2026-ALAntonioli.pdf"
+					}
+				]
 			},
 			{
 				"title": "Comparação entre Métodos Estatísticos e ML para Detecção de Eventos Extremos Climáticos",
@@ -269,7 +314,12 @@
 					"Marco Idiart",
 					"Carolina Brito"
 				],
-				"links": [{ "label": "Link de teste", "url": "https://example.com" }]
+				"links": [
+					{
+						"label": "PDF Poster",
+						"url": "/Eventos/ws-ai4ccam-2026-ABGarcez.pdf"
+					}
+				]
 			}
 		],
 		"images": [
