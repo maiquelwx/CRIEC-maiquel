@@ -38,15 +38,15 @@ export function EventPage() {
 			<Separator />
 
 			{/* Content Grid */}
-			<div className="grid gap-6 lg:grid-cols-2">
-				{/* Left Column: Description and Images */}
-				<div className="flex flex-col gap-4 lg:col-span-1">
-					<div className="px-2 py-1 lg:px-3">
+			<div className="grid grid-cols-1 gap-6">
+				{/* First Line: Description and Images */}
+				<div className="flex flex-col gap-4 lg:flex-row">
+					<div className="px-2 py-1 md:flex-1 md:px-3">
 						<Markdown>{event.description}</Markdown>
 					</div>
 
 					{event.images && event.images.length > 0 && (
-						<div className="relative px-10">
+						<div className="relative w-full max-w-200 self-center px-10 lg:flex-1">
 							<Carousel className="w-full" opts={{ loop: true }}>
 								<CarouselContent>
 									{event.images.map((image, index) => (
@@ -72,13 +72,13 @@ export function EventPage() {
 					)}
 				</div>
 
-				{/* Right Column: Sessions */}
+				{/* Second Line: Sessions */}
 				<section id="sessions" className="lg:col-span-1">
 					<div className="flex h-[80svh] flex-col">
 						<ScrollArea type="always" className="relative h-full w-full px-4">
 							{/* Fade overlay*/}
 							<div className="pointer-events-none absolute top-0 z-10 h-[5%] w-full bg-linear-to-b from-background to-transparent" />
-							<div className="grid gap-4 p-0 lg:grid-cols-1 lg:pt-[5%] lg:pb-[30svh] xl:grid-cols-2">
+							<div className="grid gap-4 p-0 pt-[5%] pb-[30svh] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 								{event.sessions.map((session) => (
 									<SessionCard
 										key={session.title}
