@@ -1,9 +1,11 @@
 name: Deploy Website
 
 on:
-  push:
-    branches:
-      - prod
+  {}
+# Execução automatica do workflow desabilitada por segurança.
+#  push:
+#    branches:
+#      - prod
 
 jobs:
   build-site:
