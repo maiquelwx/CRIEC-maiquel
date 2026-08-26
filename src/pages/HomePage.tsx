@@ -38,10 +38,12 @@ function HeroSection() {
 							mapear vulnerabilidades, identificar padrões e apoiar a
 							resiliência climática no Rio Grande do Sul.
 						</p>
-						<Button className="w-fit rounded-full px-4" size="lg">
-							Acessar painel
-							<ArrowRight data-icon="inline-end" />
-						</Button>
+						<Link to="/dashboard?view=setores">
+							<Button className="w-fit rounded-full px-4" size="lg">
+								Acessar painel
+								<ArrowRight data-icon="inline-end" />
+							</Button>
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -152,10 +154,11 @@ export function HomePage() {
 		<main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 md:gap-8 md:px-6 md:py-10">
 			<HeroSection />
 
-			<PartnersMarquee />
+			
 			<Separator />
 
 			<SobreProjeto />
+			<PartnersMarquee />
 		</main>
 	)
 }

@@ -4,6 +4,50 @@ import { CAMADAS_DISPONIVEIS } from "@/services/dataService"
 export const getLayerKey = (id: string, periodoCadUnico: string) =>
   id === "cadunico" ? `${id}:${periodoCadUnico}` : id
 
+// ---------------------------------------------------------------------------
+// Estatísticas de variável de setor censitário — calculadas em cima dos dados
+// que já foram buscados para colorir o mapa (nenhum fetch extra). Usadas para
+// alimentar a legenda/histograma no painel de variáveis e no mapa.
+// ---------------------------------------------------------------------------
+
+export interface EstatisticasVariavel {
+  min: number
+  max: number
+  media: number
+  total: number
+  histograma: number[]
+}
+
+const NUM_BINS_HISTOGRAMA = 8
+
+export const calcularEstatisticasVariavel = (
+  featureCollection: FeatureCollection | undefined
+): EstatisticasVariavel | null => {
+  if (!featureCollection) return null
+
+  const valores = featureCollection.features
+    .map((feature: any) => Number(feature?.properties?.valorSelecionado))
+    .filter((valor) => Number.isFinite(valor))
+
+  if (valores.length === 0) return null
+
+  const min = Math.min(...valores)
+  const max = Math.max(...valores)
+  const media = valores.reduce((soma, valor) => soma + valor, 0) / valores.length
+
+  const histograma = new Array(NUM_BINS_HISTOGRAMA).fill(0)
+  const amplitude = max - min || 1
+  valores.forEach((valor) => {
+    const indice = Math.min(
+      NUM_BINS_HISTOGRAMA - 1,
+      Math.floor(((valor - min) / amplitude) * NUM_BINS_HISTOGRAMA)
+    )
+    histograma[indice] += 1
+  })
+
+  return { min, max, media, total: valores.length, histograma }
+}
+
 export const buildCadUnicoMap = (cadunico: FeatureCollection) => {
   const map: Record<string, any> = {}
   cadunico.features.forEach((feature: any) => {
@@ -36,6 +80,47 @@ export const combineMunicipiosWithCadUnico = (
     })
     .filter(Boolean),
 })
+
+export const combineSetoresWithVariavel = (
+  setores: FeatureCollection,
+  valores: Array<Record<string, any>>,
+  codigoVariavel: string
+): FeatureCollection => {
+  const valoresPorCodigo = new Map<string, Record<string, any>>()
+
+  valores.forEach((item) => {
+    const codigo = item?.codigo
+    if (codigo) {
+      valoresPorCodigo.set(String(codigo), item)
+    }
+  })
+
+  return {
+    type: "FeatureCollection",
+    features: setores.features
+      .map((setor: any) => {
+        const codigo = setor?.properties?.codigo ?? setor?.properties?.CD_SETOR ?? setor?.properties?.codarea
+        if (!codigo) return null
+
+        const dadosVariavel = valoresPorCodigo.get(String(codigo))
+        if (!dadosVariavel) return null
+
+        const valorSelecionado = dadosVariavel[codigoVariavel]
+
+        return {
+          ...setor,
+          properties: {
+            ...setor.properties,
+            ...dadosVariavel,
+            codigo,
+            valorSelecionado,
+            codigoVariavelSelecionada: codigoVariavel,
+          },
+        }
+      })
+      .filter(Boolean),
+  }
+}
 
 export const pointInPolygon = (point: [number, number], polygonCoords: any) => {
   let rings: number[][][] = []
