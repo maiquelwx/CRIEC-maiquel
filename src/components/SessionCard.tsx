@@ -19,30 +19,44 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog"
 
-export interface Event {
+interface Session {
 	title: string
 	date: string // ISO 8601 string
 	location: string // Local "Informal" (ex: Anfiteatro)
 	address: string // Endereço completo
 	image?: string
-	tags?: string[]
+	tag?: number
 	description?: string
 	coordinators?: string[]
+	links?: { label?: string; url: string }[]
 }
 
-interface EventCardProps {
-	event: Event
-}
+const tagVariants = [
+	"outline-1",
+	"outline-2",
+	"outline-3",
+	"outline-4",
+	"outline-5",
+] as const
 
-export function EventCard({ event }: EventCardProps) {
+function SessionCard({
+	session,
+	eventTags,
+}: {
+	session: Session
+	eventTags?: string[]
+}) {
 	const responsavelLabel =
-		event.coordinators?.length === 1 ? "Responsável:" : "Responsáveis:"
-	const ISOdate = new Date(event.date)
+		session.coordinators?.length === 1 ? "Responsável:" : "Responsáveis:"
+	const ISOdate = new Date(session.date)
+	const tagIndex = session.tag ?? 0
+	const tagLabel = eventTags?.[tagIndex]
+	const tagVariant = tagVariants[tagIndex % tagVariants.length] ?? "outline"
 
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Card className="cursor-pointer transition-all hover:-translate-y-1 hover:shadow-sm">
+				<Card className="cursor-pointer gap-2 transition-all hover:-translate-y-1 hover:shadow-sm">
 					<CardHeader>
 						<span className="inline-flex items-center gap-1 text-lg text-muted-foreground">
 							<CalendarDays data-icon="inline-start" className="size-4.5" />
@@ -51,21 +65,21 @@ export function EventCard({ event }: EventCardProps) {
 								month: "2-digit",
 							})}
 						</span>
-						{event.tags?.[0] && (
+						{tagLabel && (
 							<CardAction>
-								<Badge variant="outline-2">{event.tags[0]}</Badge>
+								<Badge variant={tagVariant}>{tagLabel}</Badge>
 							</CardAction>
 						)}
 					</CardHeader>
 
 					<CardContent>
-						<CardTitle className="text-lg">{event.title}</CardTitle>
+						<CardTitle className="text-lg">{session.title}</CardTitle>
 					</CardContent>
 
 					<CardFooter className="text-muted-foreground">
 						<span className="inline-flex items-center gap-1">
 							<MapPin className="size-4" />
-							{event.location}
+							{session.location}
 						</span>
 					</CardFooter>
 				</Card>
@@ -73,7 +87,7 @@ export function EventCard({ event }: EventCardProps) {
 
 			<DialogContent className="max-w-lg lg:max-w-xl">
 				<DialogHeader>
-					<DialogTitle>{event.title}</DialogTitle>
+					<DialogTitle>{session.title}</DialogTitle>
 				</DialogHeader>
 				<div>
 					<DialogDescription>
@@ -89,22 +103,41 @@ export function EventCard({ event }: EventCardProps) {
 							</div>
 							<div>
 								<p className="font-semibold text-foreground">Endereço:</p>
-								<p>{event.address}</p>
+								<p>{session.address}</p>
 							</div>
-							{event.description && (
+							{session.description && (
 								<div>
 									<p className="font-semibold text-foreground">Descrição:</p>
-									<p>{event.description}</p>
+									<p>{session.description}</p>
 								</div>
 							)}
-							{event.coordinators && event.coordinators.length > 0 && (
+							{session.coordinators && session.coordinators.length > 0 && (
 								<div>
 									<p className="font-semibold text-foreground">
 										{responsavelLabel}
 									</p>
 									<ul className="list-inside list-disc">
-										{event.coordinators.map((coordinator) => (
+										{session.coordinators.map((coordinator) => (
 											<li key={coordinator}>{coordinator}</li>
+										))}
+									</ul>
+								</div>
+							)}
+							{session.links && session.links.length > 0 && (
+								<div>
+									<p className="font-semibold text-foreground">Links:</p>
+									<ul className="list-inside list-disc">
+										{session.links.map((link) => (
+											<li key={link.url}>
+												<a
+													href={link.url}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="text-accent underline-offset-2 hover:bg-foreground/15 hover:underline"
+												>
+													{link.label ?? link.url}
+												</a>
+											</li>
 										))}
 									</ul>
 								</div>
@@ -116,14 +149,14 @@ export function EventCard({ event }: EventCardProps) {
 				<DialogFooter>
 					<div className="mx-auto">
 						<AddToCalendarButton
-							name={event.title}
-							description={event.description}
+							name={session.title}
+							description={session.description}
 							// A suécia formata a data de uma forma conveniente.
 							// O botão não corrige fuso, então se tentar corrigir vai dar errado
 							// Deixar assim funciona!
 							startDate={ISOdate.toLocaleString("sv-SE").replace(" ", "T")}
 							timeZone="currentBrowser"
-							location={event.address}
+							location={session.address}
 							label="Adicionar à Agenda"
 							buttonStyle="simple"
 							listStyle="dropup-static"
@@ -147,3 +180,5 @@ export function EventCard({ event }: EventCardProps) {
 		</Dialog>
 	)
 }
+
+export default SessionCard

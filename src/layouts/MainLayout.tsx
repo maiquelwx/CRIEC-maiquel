@@ -1,7 +1,8 @@
 import { useEffect } from "react"
 import { Outlet, useLocation } from "react-router-dom"
-import { Navbar } from "@/components/Navbar"
-import { Footer } from "@/components/Footer"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+import SEO from "@/components/seo"
 
 function ScrollToTop() {
 	const { pathname } = useLocation()
@@ -16,6 +17,7 @@ function ScrollToTop() {
 export function MainLayout() {
 	return (
 		<div className="relative flex min-h-svh flex-col overflow-x-clip bg-background">
+			<SEO />
 			<ScrollToTop />
 			<Navbar />
 			<main className="flex-1">

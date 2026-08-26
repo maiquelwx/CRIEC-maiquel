@@ -17,11 +17,15 @@ const badgeVariants = cva(
 				outline:
 					"border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
 				"outline-1":
-					"border-primary/50 bg-primary/10 text-primary [a]:hover:bg-primary/15 [a]:hover:text-primary",
+					"border-chart-1/50 bg-chart-1/10 text-chart-1 [a]:hover:bg-chart-1/15 [a]:hover:text-chart-1",
 				"outline-2":
-					"border-secondary/50 bg-secondary/10 text-secondary [a]:hover:bg-secondary/15 [a]:hover:text-secondary",
+					"border-chart-2/50 bg-chart-2/10 text-chart-2 [a]:hover:bg-chart-2/15 [a]:hover:text-chart-2",
 				"outline-3":
-					"border-accent/50 bg-accent/10 text-accent [a]:hover:bg-accent/15 [a]:hover:text-accent-foreground",
+					"border-chart-3/50 bg-chart-3/10 text-chart-3 [a]:hover:bg-chart-3/15 [a]:hover:text-chart-3",
+				"outline-4":
+					"border-chart-4/50 bg-chart-4/10 text-chart-4 [a]:hover:bg-chart-4/15 [a]:hover:text-chart-4",
+				"outline-5":
+					"border-chart-5/50 bg-chart-5/10 text-chart-5 [a]:hover:bg-chart-5/15 [a]:hover:text-chart-5",
 				ghost:
 					"hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
 				link: "text-primary underline-offset-4 hover:underline",
@@ -52,4 +56,4 @@ function Badge({
 	)
 }
 
-export { Badge, badgeVariants }
+export { Badge }

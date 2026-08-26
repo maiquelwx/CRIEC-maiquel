@@ -6,6 +6,8 @@ import React from "react"
 interface MarqueeProps {
 	grayscale?: boolean
 	direction?: "left" | "right"
+	duration?: number
+	repeatCount?: number
 	pauseOnHover?: boolean
 	fade?: boolean
 	children?: React.ReactNode
@@ -15,6 +17,8 @@ interface MarqueeProps {
 export default function Marquee({
 	grayscale = false,
 	direction = "left",
+	duration = 10,
+	repeatCount = 2,
 	pauseOnHover = true,
 	fade = true,
 	children,
@@ -22,24 +26,6 @@ export default function Marquee({
 }: MarqueeProps) {
 	const content = React.Children.toArray(children)
 	const containerRef = React.useRef<HTMLDivElement>(null)
-
-	React.useEffect(() => {
-		const container = containerRef.current
-		if (!container) return
-		const preventScroll = (e: Event) => {
-			e.preventDefault()
-			e.stopPropagation()
-			container.scrollLeft = 0
-		}
-		container.addEventListener("scroll", preventScroll, { passive: false })
-		container.addEventListener("wheel", preventScroll, { passive: false })
-		container.addEventListener("touchmove", preventScroll, { passive: false })
-		return () => {
-			container.removeEventListener("scroll", preventScroll)
-			container.removeEventListener("wheel", preventScroll)
-			container.removeEventListener("touchmove", preventScroll)
-		}
-	}, [])
 
 	const animationClass =
 		direction === "left" ? "marquee-inner" : "marquee-inner-reverse"
@@ -52,11 +38,11 @@ export default function Marquee({
 				}
 
 				.marquee-inner {
-					animation: marquee-anim 20s linear infinite;
+					animation: marquee-anim var(--marquee-duration) linear infinite;
 				}
 
 				.marquee-inner-reverse {
-					animation: marquee-anim-reverse 20s linear infinite;
+					animation: marquee-anim-reverse var(--marquee-duration) linear infinite;
 				}
 
 				.marquee-container:hover .marquee-inner,
@@ -92,6 +78,7 @@ export default function Marquee({
 					className
 				)}
 				style={{
+					["--marquee-duration" as never]: `${duration}s`,
 					maskImage: fade
 						? "linear-gradient(90deg, transparent 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, transparent 100%)"
 						: "none",
@@ -112,7 +99,7 @@ export default function Marquee({
 						animationClass
 					)}
 				>
-					{Array.from({ length: 4 }).map((_, i) => (
+					{Array.from({ length: repeatCount }).map((_, i) => (
 						<div
 							key={i}
 							className="flex shrink-0 items-center gap-(--gap) pr-(--gap)"

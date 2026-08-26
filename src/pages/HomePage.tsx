@@ -18,7 +18,7 @@ function HeroSection() {
 			className="animate-in duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] zoom-in-95 fade-in"
 		>
 			<div className="overflow-hidden rounded-4xl">
-				<div className="relative h-128 md:aspect-16/8 md:h-auto">
+				<div className="relative aspect-square max-h-[50svh] w-full md:aspect-16/8 md:h-auto md:max-h-full">
 					<img src="/hero.webp" alt="Hero" className="size-full object-cover" />
 					<div className="absolute inset-0 bg-linear-to-r from-background/70 via-background/40 to-transparent" />
 					<div className="absolute top-5 right-8 flex items-center gap-2">
@@ -117,7 +117,7 @@ function PartnersMarquee() {
 			: theme
 
 	return (
-		<Marquee pauseOnHover fade className="py-4">
+		<Marquee pauseOnHover fade duration={15} className="py-2">
 			{partners.map((partner) => {
 				const [logoSrc, fallbackSrc] =
 					themeSuffix === "dark"
@@ -125,18 +125,25 @@ function PartnersMarquee() {
 						: [partner.lightPath, partner.darkPath]
 				return (
 					<div key={partner.name} className="flex">
-						<HoverCard>
+						<HoverCard openDelay={450} closeDelay={200}>
 							<HoverCardTrigger asChild>
-								<img
-									src={logoSrc}
-									alt={partner.name}
-									onError={(event) => {
-										const target = event.currentTarget
-										target.onerror = null
-										target.src = fallbackSrc
-									}}
-									className="h-36 rounded-2xl p-3 opacity-75 transition-opacity hover:bg-popover hover:opacity-100 md:mx-2"
-								/>
+								<a
+									href={partner.website}
+									target="_blank"
+									rel="noopener"
+									className="block"
+								>
+									<img
+										src={logoSrc}
+										alt={partner.name}
+										onError={(event) => {
+											const target = event.currentTarget
+											target.onerror = null
+											target.src = fallbackSrc
+										}}
+										className="h-36 max-w-64 rounded-2xl p-3 opacity-75 transition-opacity hover:bg-popover hover:opacity-100"
+									/>
+								</a>
 							</HoverCardTrigger>
 							<HoverCardContent className="w-fit px-3 py-2 font-heading">
 								{partner.name}
