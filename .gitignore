@@ -22,3 +22,6 @@ src/data/json/
 *.njsproj
 *.sln
 *.sw?
+
+public/data/json/curvas_nivel_preview.json
+public/data/json/localidades_preview.json

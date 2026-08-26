@@ -254,6 +254,17 @@
 		"imgPath": "/Equipe/TPONogueira.webp"
 	},
 	{
+		"name": "Maiquel Ronaldo Cavalheiro",
+		"role": "ic",
+		"institution": "UFRGS",
+		"area": "",
+		"description": "Desenvolvimento e manutenção da interface web do projeto, incluindo dashboards de visualização geoespacial interativa com integração de dados sociais, econômicos e geográficos, e gestão do banco de dados.",
+		"links": {
+			"lattes": "http://lattes.cnpq.br/2071952687062616"
+		},
+		"imgPath": "/Equipe/MCavalheiro.webp"
+	},
+	{
 		"name": "Vivian Dornelas",
 		"role": "professor",
 		"institution": "UFSB",
