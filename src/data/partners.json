@@ -1,22 +1,56 @@
 [
-  {
-    "name": "UFRGS",
-    "darkPath": "/Parceiros/Logo-UFRGS-dark.webp",
-    "lightPath": "/Parceiros/Logo-UFRGS-light.webp"
-  },
-  {
-    "name": "UFPel",
-    "darkPath": "/Parceiros/Logo-UFPel-dark.webp",
-    "lightPath": "/Parceiros/Logo-UFPel-light.webp"
-  },
-  {
-    "name": "UFSM",
-    "darkPath": "/Parceiros/Logo-UFSM-dark.webp",
-    "lightPath": "/Parceiros/Logo-UFSM-light.webp"
-  },
-  {
-    "name": "FAPERGS",
-    "darkPath": "/Parceiros/Logo-FAPERGS.webp",
-    "lightPath": "/Parceiros/Logo-FAPERGS.webp"
-  }
+	{
+		"name": "UFRGS",
+		"darkPath": "/Parceiros/UFRGS-dark.svg",
+		"lightPath": "/Parceiros/UFRGS-light.svg",
+		"website": "https://www.ufrgs.br/"
+	},
+	{
+		"name": "UFPel",
+		"darkPath": "/Parceiros/UFPel-dark.svg",
+		"lightPath": "/Parceiros/UFPel-light.svg",
+		"website": "https://www.ufpel.edu.br/"
+	},
+	{
+		"name": "UFSM",
+		"darkPath": "/Parceiros/UFSM-dark.svg",
+		"lightPath": "/Parceiros/UFSM-light.svg",
+		"website": "https://www.ufsm.br/"
+	},
+	{
+		"name": "FAPERGS",
+		"darkPath": "/Parceiros/FAPERGS.svg",
+		"lightPath": "/Parceiros/FAPERGS.svg",
+		"website": "https://fapergs.rs.gov.br/"
+	},
+	{
+		"name": "UPC",
+		"darkPath": "/Parceiros/UPC.svg",
+		"lightPath": "/Parceiros/UPC.svg",
+		"website": "https://www.upc.edu/en"
+	},
+	{
+		"name": "PUC-Rio",
+		"darkPath": "/Parceiros/PUC-Rio-dark.svg",
+		"lightPath": "/Parceiros/PUC-Rio-light.svg",
+		"website": "https://www.puc-rio.br/"
+	},
+	{
+		"name": "Paipe",
+		"darkPath": "/Parceiros/Paipe-dark.svg",
+		"lightPath": "/Parceiros/Paipe-light.svg",
+		"website": "https://paipe.com/"
+	},
+	{
+		"name": "NCSU",
+		"darkPath": "/Parceiros/NCSU.svg",
+		"lightPath": "/Parceiros/NCSU.svg",
+		"website": "https://www.ncsu.edu/"
+	},
+	{
+		"name": "Exon",
+		"darkPath": "/Parceiros/Exeter.svg",
+		"lightPath": "/Parceiros/Exeter.svg",
+		"website": "https://www.exeter.ac.uk/"
+	}
 ]

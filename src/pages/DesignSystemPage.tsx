@@ -2,6 +2,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useLocation } from "react-router-dom"
 
 const surfaces = [
 	{
@@ -171,6 +172,16 @@ function ThemePreview({ dark = false }: { dark?: boolean }) {
 
 							<Button variant="outline">Outline</Button>
 
+							<Button variant="outline-1">Outline 1</Button>
+
+							<Button variant="outline-2">Outline 2</Button>
+
+							<Button variant="outline-3">Outline 3</Button>
+
+							<Button variant="outline-4">Outline 4</Button>
+
+							<Button variant="outline-5">Outline 5</Button>
+
 							<Button variant="ghost">Ghost</Button>
 
 							<Button variant="destructive">Destructive</Button>
@@ -187,6 +198,16 @@ function ThemePreview({ dark = false }: { dark?: boolean }) {
 							<Badge variant="secondary">Secondary</Badge>
 
 							<Badge variant="outline">Outline</Badge>
+
+							<Badge variant="outline-1">Outline 1</Badge>
+
+							<Badge variant="outline-2">Outline 2</Badge>
+
+							<Badge variant="outline-3">Outline 3</Badge>
+
+							<Badge variant="outline-4">Outline 4</Badge>
+
+							<Badge variant="outline-5">Outline 5</Badge>
 
 							<Badge variant="destructive">Destructive</Badge>
 						</div>
@@ -264,6 +285,15 @@ function ThemePreview({ dark = false }: { dark?: boolean }) {
 }
 
 export default function DesignSystemPage() {
+	// INICIO REMOVER
+	const { search } = useLocation()
+	const shouldTriggerRouteError =
+		new URLSearchParams(search).get("triggerRouteError") === "true"
+
+	if (shouldTriggerRouteError) {
+		throw new Error("RouteError disparado manualmente para validação visual.")
+	}
+	// FIM REMOVER
 	return (
 		<div className="grid min-h-screen grid-cols-1 xl:grid-cols-2">
 			<ThemePreview />

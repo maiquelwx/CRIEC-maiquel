@@ -1,0 +1,58 @@
+name: Deploy Website
+
+on:
+  {}
+# Execução automatica do workflow desabilitada por segurança.
+#  push:
+#    branches:
+#      - prod
+
+jobs:
+  build-site:
+    name: Build Site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Website
+        run: npm run build
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v8
+        with:
+          name: site-build
+          path: dist/
+
+  deploy-site:
+    name: Deploy Site
+    needs: build-site
+
+    runs-on: self-hosted
+
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-build
+          path: dist
+
+      - name: Save Build Locally
+        run: |
+          echo "Run Number: $GITHUB_RUN_NUMBER"
+          echo "Commit SHA: $GITHUB_SHA"
+  
+          DEPLOY="${{ github.run_number }}-${GITHUB_SHA::7}"
+          DIR="${{ vars.DEPLOY_PATH }}/$DEPLOY"
+      
+          mkdir -p "$DIR"
+          cp -R dist/* "$DIR/"
